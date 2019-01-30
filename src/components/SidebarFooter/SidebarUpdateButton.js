@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -9,7 +9,7 @@ import { Text } from '@dlghq/react-l10n';
 import styles from './SidebarFooter.css';
 
 export type Props = {
-  onClick: () => mixed
+  onClick: () => mixed,
 };
 
 class SidebarUpdateButton extends PureComponent<Props> {

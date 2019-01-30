@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -10,7 +10,7 @@ import styles from './PadButton.css';
 type Props = {
   className?: string,
   value: string,
-  onClick: (value: string) => mixed
+  onClick: (value: string) => mixed,
 };
 
 class PadButton extends PureComponent<Props> {

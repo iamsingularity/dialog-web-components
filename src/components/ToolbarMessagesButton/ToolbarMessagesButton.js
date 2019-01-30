@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -11,13 +11,17 @@ import styles from './ToolbarMessagesButton.css';
 export type Props = {
   className?: string,
   onClick: () => void,
-  active: boolean
+  active: boolean,
 };
 
 function ToolbarMessagesButton(props: Props) {
-  const className = classNames(styles.container, {
-    [styles.active]: props.active
-  }, props.className);
+  const className = classNames(
+    styles.container,
+    {
+      [styles.active]: props.active,
+    },
+    props.className,
+  );
 
   return (
     <Icon

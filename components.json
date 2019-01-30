@@ -3,9 +3,9 @@
     "name": "Interface",
     "components": [
       "Avatar",
+      "AvatarDouble",
       "PeerAvatar",
-      "PeerAvatarWithStatus",
-      "DoublePeerAvatar",
+      "PeerAvatarDouble",
       "PeerInfoTitle",
       "Scroller",
       "Dropdown",
@@ -31,12 +31,19 @@
       "ScrollToBottom",
       "CustomProfile",
       "UserStatus",
-      "SidebarMenuProfile"
+      "SidebarMenuProfile",
+      "SpaceList"
     ]
   },
   {
     "name": "Buttons",
-    "components": ["Button", "ButtonNext", "LinkButton", "IconButton", "LinkIconButton"]
+    "components": [
+      "Button",
+      "ButtonNext",
+      "LinkButton",
+      "IconButton",
+      "LinkIconButton"
+    ]
   },
   {
     "name": "Forms",
@@ -80,7 +87,11 @@
       "AddMembersModal",
       "EditGroupModal",
       "FeedbackModal",
-      "AdminModal"
+      "AdminModal",
+      "EditSpaceModal",
+      "CreateSpaceModal",
+      "SelectCertificateModal",
+      "SpaceInfoModal"
     ]
   },
   {
@@ -120,7 +131,8 @@
       "FakeMessage",
       "EmptyChat",
       "WelcomeMessage",
-      "MessageMediaInteractive"
+      "MessageMediaInteractive",
+      "VoiceRecorder"
     ]
   },
   {
@@ -156,7 +168,8 @@
       "Trigger",
       "Alert",
       "Confirm",
-      "CopyButton"
+      "CopyButton",
+      "ImagePreloader"
     ]
   },
   {

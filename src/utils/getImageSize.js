@@ -1,18 +1,18 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
 export type ImageSize = {
   width: number,
-  height: number
+  height: number,
 };
 
 function getImageSize(
   width: number,
   height: number,
   maxWidth?: ?number,
-  maxHeight?: ?number
+  maxHeight?: ?number,
 ): ImageSize {
   if (maxWidth && maxHeight) {
     if (maxWidth > width && maxHeight > height) {
@@ -23,7 +23,7 @@ function getImageSize(
 
     return {
       width: width * ratio,
-      height: height * ratio
+      height: height * ratio,
     };
   }
 

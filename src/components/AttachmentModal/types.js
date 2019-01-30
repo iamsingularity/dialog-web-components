@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -7,7 +7,7 @@ export type AttachmentFile = Blob | File;
 
 export type Attachment = {
   file: AttachmentFile,
-  isDocument: boolean
+  isDocument: boolean,
 };
 
 export type AttachmentModalProps = {
@@ -19,19 +19,19 @@ export type AttachmentModalProps = {
   onSend: (attachments: Attachment[]) => mixed,
   onSendAll: (attachments: Attachment[]) => mixed,
   onCurrentChange: (current: number) => mixed,
-  onSendAsFileChange: (sendAsFIle: boolean) => mixed
+  onSendAsFileChange: (sendAsFIle: boolean) => mixed,
 };
 
 export type AttachmentPreviewProps = {
   className?: string,
   fileClassName?: string,
   imageClassName?: string,
-  file: AttachmentFile
+  file: AttachmentFile,
 };
 
 export type AttachmentMetaProps = {
   className?: string,
   attachment: Attachment,
   sendAsFile: boolean,
-  onSendAsFileChange: (sendAsFIle: boolean) => mixed
+  onSendAsFileChange: (sendAsFIle: boolean) => mixed,
 };

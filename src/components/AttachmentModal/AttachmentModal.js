@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -71,7 +71,7 @@ class AttachmentModal extends PureComponent<Props> {
         break;
 
       default:
-        // do nothing
+      // do nothing
     }
   };
 
@@ -179,7 +179,10 @@ class AttachmentModal extends PureComponent<Props> {
           <ModalHeader withBorder className={styles.header}>
             <Text id="AttachmentModal.title" />
             {this.renderPagination()}
-            <ModalClose onClick={this.props.onClose} id="attachment_close_button" />
+            <ModalClose
+              onClick={this.props.onClose}
+              id="attachment_close_button"
+            />
           </ModalHeader>
           {this.renderBody()}
           {this.renderFooter()}

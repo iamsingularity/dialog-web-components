@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -12,7 +12,7 @@ export type Props = {
   onClose?: () => mixed,
   onBack?: () => mixed,
   children?: Node,
-  className?: string
+  className?: string,
 };
 
 class ActivityHeader extends PureComponent<Props> {

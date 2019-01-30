@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -10,7 +10,7 @@ import styles from './ActivityMediaVoice.css';
 type Props = {
   url: ?string,
   duration: ?number,
-  sender: ?string
+  sender: ?string,
 };
 
 class ActivityMediaVoice extends PureComponent<Props> {

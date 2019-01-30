@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -12,7 +12,7 @@ import Image from '../Image/Image';
 type Props = {
   pack: StickerPack,
   active: boolean,
-  onClick: (id: string) => void
+  onClick: (id: string) => void,
 };
 
 class StickerTab extends PureComponent<Props> {
@@ -35,7 +35,7 @@ class StickerTab extends PureComponent<Props> {
 
   render() {
     const className = classNames(styles.footerTabSticker, {
-      [styles.active]: this.props.active
+      [styles.active]: this.props.active,
     });
 
     return (

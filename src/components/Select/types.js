@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -7,7 +7,7 @@ import type { ColorTheme } from '@dlghq/dialog-types';
 
 export type Option = {
   value: string,
-  title: string
+  title: string,
 };
 
 export type Props = {
@@ -23,5 +23,5 @@ export type Props = {
   size: 'small' | 'normal',
   options: Option[],
   placeholder?: string,
-  onChange: (value: string) => mixed
+  onChange: (value: string) => mixed,
 };

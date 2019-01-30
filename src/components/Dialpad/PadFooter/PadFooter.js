@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -11,7 +11,7 @@ import Icon from './../../Icon/Icon';
 
 export type Props = {
   className?: string,
-  onCallClick?: () => mixed
+  onCallClick?: () => mixed,
 };
 
 class PadFooter extends PureComponent<Props> {
@@ -24,7 +24,12 @@ class PadFooter extends PureComponent<Props> {
 
     return (
       <div className={className}>
-        <Button theme="success" wide className={styles.button} onClick={this.props.onCallClick}>
+        <Button
+          theme="success"
+          wide
+          className={styles.button}
+          onClick={this.props.onCallClick}
+        >
           <Icon glyph="phone_outline" className={styles.buttonIcon} size={26} />
         </Button>
       </div>

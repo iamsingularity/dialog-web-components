@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -10,7 +10,7 @@ import Icon from '../Icon/Icon';
 import styles from './Dragndrop.css';
 
 export type Props = {
-  className?: string
+  className?: string,
 };
 
 class Dragndrop extends PureComponent<Props> {

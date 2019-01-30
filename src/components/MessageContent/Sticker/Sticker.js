@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -12,7 +12,7 @@ export type Props = {
   image: ?string,
   width: number,
   height: number,
-  onClick?: (event: SyntheticMouseEvent<>) => mixed
+  onClick?: (event: SyntheticMouseEvent<>) => mixed,
 };
 
 function Sticker(props: Props) {

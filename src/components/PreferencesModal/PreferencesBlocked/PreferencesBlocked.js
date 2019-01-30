@@ -1,10 +1,10 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
 import type { User } from '@dlghq/dialog-types';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, type Node } from 'react';
 import { Text, LocalizationContextType } from '@dlghq/react-l10n';
 import { filterByQuery } from '@dlghq/dialog-utils';
 import Fieldset from '../../Fieldset/Fieldset';
@@ -14,34 +14,26 @@ import preferencesStyles from '../PreferencesModal.css';
 import styles from './Blocked.css';
 
 export type Props = {
-  blocked: User[],
-  onUnblockUser: (id: number) => mixed
+  blocked: Array<User>,
+  onUnblockUser: (id: number) => mixed,
 };
 
 export type State = {
-  query: string
-}
+  query: string,
+};
 
-class PreferencesSecurity extends PureComponent<Props, State> {
-  handleQueryChange: (value: string) => void;
-
+class PreferencesBlocked extends PureComponent<Props, State> {
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
-  constructor(props: Props) {
-    super(props);
+  state = {
+    query: '',
+  };
 
-    this.state = {
-      query: ''
-    };
-
-    this.handleQueryChange = this.handleQueryChange.bind(this);
-  }
-
-  handleQueryChange(query: string): void {
+  handleQueryChange = (query: string): void => {
     this.setState({ query });
-  }
+  };
 
   renderSearchInput() {
     const { blocked } = this.props;
@@ -54,12 +46,14 @@ class PreferencesSecurity extends PureComponent<Props, State> {
     return (
       <SearchInput
         onChange={this.handleQueryChange}
-        placeholder={l10n.formatText('PreferencesModal.blocked.search_placeholder')}
+        placeholder={l10n.formatText(
+          'PreferencesModal.blocked.search_placeholder',
+        )}
       />
     );
   }
 
-  renderBlockedUsers() {
+  renderBlockedUsers(): Node {
     const { blocked } = this.props;
     const { query } = this.state;
 
@@ -70,7 +64,7 @@ class PreferencesSecurity extends PureComponent<Props, State> {
           id="PreferencesModal.blocked.empty"
           className={styles.empty}
           tagName="div"
-        />
+        />,
       ];
     }
 
@@ -83,7 +77,7 @@ class PreferencesSecurity extends PureComponent<Props, State> {
           id="PreferencesModal.blocked.not_found"
           className={styles.notFound}
           tagName="div"
-        />
+        />,
       ];
     }
 
@@ -110,4 +104,4 @@ class PreferencesSecurity extends PureComponent<Props, State> {
   }
 }
 
-export default PreferencesSecurity;
+export default PreferencesBlocked;

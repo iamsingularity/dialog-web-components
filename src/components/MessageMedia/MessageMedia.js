@@ -1,11 +1,11 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
 import type {
   MessageMedia as MessageMediaType,
-  MessageMediaInteractiveConfirm
+  MessageMediaInteractiveConfirm,
 } from '@dlghq/dialog-types';
 import * as React from 'react';
 import MessageMediaWebpage from './MessageMediaWebpage';
@@ -18,7 +18,11 @@ export type Props = {
   media: MessageMediaType,
   maxWidth: number,
   maxHeight: number,
-  onInteractiveAction?: (id: string, value: string, confirm?: ?MessageMediaInteractiveConfirm) => mixed
+  onInteractiveAction?: (
+    id: string,
+    value: string,
+    confirm?: ?MessageMediaInteractiveConfirm,
+  ) => mixed,
 };
 
 function MessageMedia(props: Props) {

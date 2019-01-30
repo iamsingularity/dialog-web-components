@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -13,7 +13,7 @@ export type Props = {
   duration: number,
   fileUrl: ?string,
   isUploading: boolean,
-  maxWidth: number
+  maxWidth: number,
 };
 
 class Voice extends PureComponent<Props> {
@@ -22,7 +22,10 @@ class Voice extends PureComponent<Props> {
     const className = classNames(styles.container, this.props.className);
 
     return (
-      <div className={className} style={{ width: maxWidth === 0 ? '100%' : maxWidth }}>
+      <div
+        className={className}
+        style={{ width: maxWidth === 0 ? '100%' : maxWidth }}
+      >
         <AudioPlayer src={fileUrl} duration={duration} pending={isUploading} />
       </div>
     );

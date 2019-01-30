@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -14,7 +14,7 @@ export type Props = {
   title: string,
   userName?: ?string,
   about?: ?string,
-  renderActions?: () => Node
+  renderActions?: () => Node,
 };
 
 class WelcomeMessageUser extends PureComponent<Props> {
@@ -23,11 +23,7 @@ class WelcomeMessageUser extends PureComponent<Props> {
       return null;
     }
 
-    return (
-      <div className={styles.actions}>
-        {this.props.renderActions()}
-      </div>
-    );
+    return <div className={styles.actions}>{this.props.renderActions()}</div>;
   }
 
   renderAbout() {

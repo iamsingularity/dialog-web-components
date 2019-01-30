@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -20,7 +20,7 @@ type Props = {
   info: PeerInfo,
   message: Message,
   onGoToPeer?: (peer: Peer) => mixed,
-  onGoToMessage?: (peer: Peer, message: Message) => mixed
+  onGoToMessage?: (peer: Peer, message: Message) => mixed,
 };
 
 class SidebarSearchItemMessage extends PureComponent<Props> {
@@ -65,10 +65,14 @@ class SidebarSearchItemMessage extends PureComponent<Props> {
 
   render() {
     const { highlighted, short, message } = this.props;
-    const className = classNames(styles.container, {
-      [styles.highlighted]: highlighted,
-      [styles.short]: short
-    }, this.props.className);
+    const className = classNames(
+      styles.container,
+      {
+        [styles.highlighted]: highlighted,
+        [styles.short]: short,
+      },
+      this.props.className,
+    );
 
     const sender = this.getSender();
 

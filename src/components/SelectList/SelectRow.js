@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -10,7 +10,7 @@ export type Props = {
   index: number,
   style: { [key: string]: string },
   onHover: (index: number) => void,
-  onSelect: (index: number) => void
+  onSelect: (index: number) => void,
 };
 
 class SelectRow extends PureComponent<Props> {

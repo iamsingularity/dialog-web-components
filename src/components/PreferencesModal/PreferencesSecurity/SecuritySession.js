@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -9,22 +9,19 @@ import React, { PureComponent } from 'react';
 import { LocalizationContextType, Text } from '@dlghq/react-l10n';
 import Field from '../../Field/Field';
 import Button from '../../Button/Button';
-import getLocalDateTimeFormat from '../../../utils/getLocalDateTimeFormat';
-import getDateFnsLocale from '../../../utils/getDateFnsLocale';
-import formatDate from 'date-fns/format';
 import styles from './Security.css';
 import UAParser from 'ua-parser-js';
 
 export type Props = {
   session: AuthSession,
-  onSessionTerminate?: (id: number) => mixed
+  onSessionTerminate?: (id: number) => mixed,
 };
 
 class Session extends PureComponent<Props> {
   context: ProviderContext;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   handleTerminateClick = (): void => {
@@ -54,14 +51,25 @@ class Session extends PureComponent<Props> {
   }
 
   renderAuthTime() {
-    const { session } = this.props;
-
-    const format = getLocalDateTimeFormat(this.context.l10n.locale);
-    const locale = getDateFnsLocale(this.context.l10n.locale);
+    const {
+      l10n: { locale },
+    } = this.context;
+    const {
+      session: { authTime },
+    } = this.props;
 
     return (
-      <time className={styles.sessionAuthTime} dateTime={session.authTime.toISOString()}>
-        {formatDate(session.authTime, format, locale)}
+      <time
+        className={styles.sessionAuthTime}
+        dateTime={authTime.toISOString()}
+      >
+        {authTime.toLocaleTimeString(locale, {
+          hour: 'numeric',
+          minute: 'numeric',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}
       </time>
     );
   }
@@ -91,11 +99,7 @@ class Session extends PureComponent<Props> {
       deviceTitle = session.deviceTitle;
     }
 
-    return (
-      <div className={styles.sessionDeviceTitle}>
-        {deviceTitle}
-      </div>
-    );
+    return <div className={styles.sessionDeviceTitle}>{deviceTitle}</div>;
   }
 
   render() {
@@ -104,9 +108,7 @@ class Session extends PureComponent<Props> {
     return (
       <Field className={styles.session}>
         <div className={styles.sessionMeta}>
-          <div className={styles.sessionTitle}>
-            {session.appTitle}
-          </div>
+          <div className={styles.sessionTitle}>{session.appTitle}</div>
           {this.renderAuthTime()}
           {this.renderDeviceTitle()}
         </div>

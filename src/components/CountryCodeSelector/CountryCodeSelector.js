@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -13,22 +13,25 @@ import CountryCodeSelectorOption from './CountryCodeSelectorOption';
 import countries from './utils/countries';
 import { getPreferredCountryCode } from '../../utils/language';
 import { isCountryMatches } from './utils/isCountryMatches';
+import { getCountryName } from '@dlghq/country-codes';
 
 class CountryCodeSelector extends PureComponent<Props> {
   select: ?VirtualizedSelect;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   static defaultProps = {
-    countries
+    countries,
   };
 
   componentWillMount() {
     const preferredCountryCode = getPreferredCountryCode();
     if (preferredCountryCode) {
-      const currentCountry = this.props.countries.find((country) => country.alpha === preferredCountryCode);
+      const currentCountry = this.props.countries.find(
+        (country) => country.alpha === preferredCountryCode,
+      );
       if (currentCountry) {
         this.props.onChange(currentCountry);
       }
@@ -53,17 +56,31 @@ class CountryCodeSelector extends PureComponent<Props> {
     }
 
     return (
-      <Text className={styles.label} id={label} onClick={this.handleLabelClick} />
+      <Text
+        className={styles.label}
+        id={label}
+        onClick={this.handleLabelClick}
+      />
     );
   }
 
   render() {
-    const { l10n: { formatText } } = this.context;
+    const {
+      l10n: { formatText, locale },
+    } = this.context;
     const className = classNames(
       styles.container,
       this.props.className,
-      this.props.disabled ? styles.disabled : null
+      this.props.disabled ? styles.disabled : null,
     );
+    const sortedCountries = this.props.countries.sort((country1, country2) => {
+      const [countryName1, countryName2]: [string, string] = [
+        getCountryName(country1.alpha, locale),
+        getCountryName(country2.alpha, locale),
+      ];
+
+      return countryName1.localeCompare(countryName2);
+    });
 
     return (
       <div className={className}>
@@ -75,7 +92,7 @@ class CountryCodeSelector extends PureComponent<Props> {
           valueKey="alpha"
           clearable={false}
           optionHeight={40}
-          options={this.props.countries}
+          options={sortedCountries}
           placeholder={formatText('CountryCodeSelector.search')}
           noResultsText={formatText('CountryCodeSelector.not_found')}
           disabled={this.props.disabled}

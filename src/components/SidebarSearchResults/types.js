@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -9,7 +9,7 @@ export type SearchEntity = {
   info: PeerInfo,
   focus: Message,
   before: Message[],
-  after: Message[]
+  after: Message[],
 };
 
 export type SidebarSearchResultsProps = {
@@ -18,5 +18,5 @@ export type SidebarSearchResultsProps = {
   peers: PeerInfo[],
   messages: Field<SearchEntity[]>,
   onGoToPeer: (peer: Peer) => mixed,
-  onGoToMessage: (peer: Peer, message: Message) => mixed
+  onGoToMessage: (peer: Peer, message: Message) => mixed,
 };

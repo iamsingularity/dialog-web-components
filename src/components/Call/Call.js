@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -62,7 +62,9 @@ class Call extends PureComponent<Props> {
         onGoToPeer={this.props.onGoToPeer}
         onMuteToggle={this.handleMuteToggle}
         onCameraToggle={isVideoEnabled ? this.handleCameraToggle : null}
-        onScreenShareToggle={isScreenSharingEnabled ? this.handleScreenShareToggle : null}
+        onScreenShareToggle={
+          isScreenSharingEnabled ? this.handleScreenShareToggle : null
+        }
       />
     );
   }

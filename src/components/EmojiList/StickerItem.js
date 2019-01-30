@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -10,7 +10,7 @@ import styles from './EmojiList.css';
 
 export type Props = {
   sticker: Sticker,
-  onClick: (sticker: Sticker) => mixed
+  onClick: (sticker: Sticker) => mixed,
 };
 
 class StickerItem extends PureComponent<Props> {

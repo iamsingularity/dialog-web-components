@@ -1,12 +1,11 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
 import type { ProviderContext } from '@dlghq/react-l10n';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { LocalizationContextType } from '@dlghq/react-l10n';
 import { fileToBase64 } from '@dlghq/dialog-utils';
 import AvatarSelector from '../AvatarSelector/AvatarSelector';
 import InputNext from '../InputNext/InputNext';
@@ -24,14 +23,15 @@ export type Props = {
   className?: string,
   vertical: boolean,
   isPublicGroupsEnabled: boolean,
+  aboutMaxLength?: number,
   onSubmit: (event: SyntheticEvent<>) => void,
   onChange: (value: string, event: SyntheticInputEvent<>) => void,
   onAvatarRemove: () => void,
-  onAvatarChange: (avatar: File) => void
+  onAvatarChange: (avatar: File) => void,
 };
 export type State = {
   avatar: ?string,
-  isPublic: boolean
+  isPublic: boolean,
 };
 
 export type Context = ProviderContext;
@@ -39,12 +39,9 @@ export type Context = ProviderContext;
 class CreateGroupInfoForm extends PureComponent<Props, State> {
   shortnameInput: ?InputNext;
 
-  static contextTypes = {
-    l10n: LocalizationContextType
-  };
-
   static defaultProps = {
-    vertical: false
+    aboutMaxLength: 3000,
+    vertical: false,
   };
 
   constructor(props: Props, context: Context) {
@@ -52,7 +49,7 @@ class CreateGroupInfoForm extends PureComponent<Props, State> {
 
     this.state = {
       avatar: null,
-      isPublic: Boolean(props.shortname)
+      isPublic: Boolean(props.shortname),
     };
   }
 
@@ -101,7 +98,7 @@ class CreateGroupInfoForm extends PureComponent<Props, State> {
     return (
       <div className={styles.avatarBlock}>
         <AvatarSelector
-          name={title}
+          title={title}
           placeholder="empty"
           avatar={avatar}
           size={140}
@@ -144,27 +141,26 @@ class CreateGroupInfoForm extends PureComponent<Props, State> {
   }
 
   render() {
-    const { id, type, about, title, vertical } = this.props;
-    const { l10n } = this.context;
+    const { id, type, about, aboutMaxLength, title, vertical } = this.props;
     const className = classNames(
       styles.info,
       {
-        [styles.vertical]: vertical
+        [styles.vertical]: vertical,
       },
-      this.props.className
+      this.props.className,
     );
 
     return (
       <div className={className}>
         {this.renderAvatar()}
-        <form id={id} autoComplete="off" className={styles.form} onSubmit={this.handleSubmit}>
+        <form id={id} autoComplete="off" className={styles.form}>
           <InputNext
             className={styles.input}
             id={`${id}_title`}
             name="title"
             onChange={this.props.onChange}
-            placeholder={l10n.formatText(`CreateNewModal.${type}.info.title.placeholder`)}
-            label={l10n.formatText(`CreateNewModal.${type}.info.title.label`)}
+            placeholder={`CreateNewModal.${type}.info.title.placeholder`}
+            label={`CreateNewModal.${type}.info.title.label`}
             value={title}
             htmlAutoFocus
           />
@@ -173,10 +169,11 @@ class CreateGroupInfoForm extends PureComponent<Props, State> {
             id={`${id}_about`}
             name="about"
             onChange={this.props.onChange}
-            label={l10n.formatText(`CreateNewModal.${type}.info.description.label`)}
-            placeholder={l10n.formatText(`CreateNewModal.${type}.info.description.placeholder`)}
+            label={`CreateNewModal.${type}.info.description.label`}
+            placeholder={`CreateNewModal.${type}.info.description.placeholder`}
             type="textarea"
             value={about || ''}
+            maxLength={aboutMaxLength}
           />
           {this.renderShortname()}
         </form>

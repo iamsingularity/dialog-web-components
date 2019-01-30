@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -19,23 +19,17 @@ export type Props = {
   createdAt?: ?string,
   creator?: ?string,
   userName?: ?string,
-  renderActions?: () => Node
+  renderActions?: () => Node,
 };
 
 function WelcomeMessage(props: Props) {
   switch (props.type) {
     case 'group':
-      return (
-        <WelcomeMessageGroup {...props} />
-      );
+      return <WelcomeMessageGroup {...props} />;
     case 'channel':
-      return (
-        <WelcomeMessageChannel {...props} />
-      );
+      return <WelcomeMessageChannel {...props} />;
     case 'user':
-      return (
-        <WelcomeMessageUser {...props} />
-      );
+      return <WelcomeMessageUser {...props} />;
     default:
       return null;
   }

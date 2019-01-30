@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -16,17 +16,25 @@ export type Props = {
   fileUrl: ?string,
   fileName: ?string,
   maxHeight: number,
-  maxWidth: number
+  maxWidth: number,
 };
 
 function Video(props: Props) {
-  const style = getImageSize(props.width, props.height, props.maxWidth, props.maxHeight);
+  const style = getImageSize(
+    props.width,
+    props.height,
+    props.maxWidth,
+    props.maxHeight,
+  );
   const className = classNames(styles.container, props.className);
 
   return (
     <div className={className} style={style} title={props.fileName}>
       <video
-        controls src={props.fileUrl} width={style.width} height={style.height}
+        controls
+        src={props.fileUrl}
+        width={style.width}
+        height={style.height}
         poster={props.preview}
       />
     </div>

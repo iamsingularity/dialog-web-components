@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -11,16 +11,16 @@ import styles from './ToolbarCallButton.css';
 export type Props = {
   className?: string,
   disabled: boolean,
-  onClick: (event: SyntheticMouseEvent<>) => mixed
+  onClick: (event: SyntheticMouseEvent<>) => mixed,
 };
 
 function ToolbarCallButton(props: Props) {
   const className = classNames(
     styles.container,
     {
-      [styles.disabled]: props.disabled
+      [styles.disabled]: props.disabled,
     },
-    props.className
+    props.className,
   );
 
   if (props.disabled) {

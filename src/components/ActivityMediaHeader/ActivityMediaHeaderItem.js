@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -10,7 +10,7 @@ import DropdownItem from '../Dropdown/DropdownItem';
 export type Props = {
   id?: string,
   type: string,
-  onClick?: (type: string) => mixed
+  onClick?: (type: string) => mixed,
 };
 
 class ActivityMediaHeaderItem extends PureComponent<Props> {

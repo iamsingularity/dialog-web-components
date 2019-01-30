@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -9,17 +9,13 @@ import styles from './Toolbar.css';
 
 export type Props = {
   className?: string,
-  children: React.Node
+  children: React.Node,
 };
 
 function ToolbarButtons(props: Props) {
   const className = classNames(styles.buttons, props.className);
 
-  return (
-    <div className={className}>
-      {props.children}
-    </div>
-  );
+  return <div className={className}>{props.children}</div>;
 }
 
 export default ToolbarButtons;

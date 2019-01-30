@@ -1,16 +1,15 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
 export type MenuItem = {
   title: string,
-  handler: () => void
+  handler: () => void,
 };
 
 export type Props = {
   className?: string,
   children?: mixed,
-  getMenu: () => MenuItem[]
+  getMenu: () => MenuItem[],
 };
-

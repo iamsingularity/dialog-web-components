@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -13,21 +13,13 @@ import styles from './Blocked.css';
 
 export type Props = {
   user: User,
-  onUnblockUser: (id: number) => mixed
+  onUnblockUser: (id: number) => mixed,
 };
 
 class BlockedUser extends PureComponent<Props> {
-  handleUnblock: () => void;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.handleUnblock = this.handleUnblock.bind(this);
-  }
-
-  handleUnblock(): void {
+  handleUnblock = (): void => {
     this.props.onUnblockUser(this.props.user.id);
-  }
+  };
 
   render() {
     const { user } = this.props;
@@ -43,14 +35,8 @@ class BlockedUser extends PureComponent<Props> {
             placeholder={user.placeholder}
           />
           <div className={styles.userInfo}>
-            <p className={styles.userName}>
-              {user.name}
-            </p>
-            {user.nick && (
-              <p className={styles.userNick}>
-                {`@${user.nick}`}
-              </p>
-            )}
+            <p className={styles.userName}>{user.name}</p>
+            {user.nick && <p className={styles.userNick}>{`@${user.nick}`}</p>}
           </div>
         </div>
 

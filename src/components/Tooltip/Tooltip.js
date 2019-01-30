@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -24,14 +24,14 @@ export type Props = {
    * [Tether options](http://tether.io/#options)
    */
   options?: Object,
-  theme: ColorTheme
+  theme: ColorTheme,
 };
 
 class Tooltip extends Component<Props> {
   trigger: ?Trigger;
 
   static defaultProps = {
-    theme: 'default'
+    theme: 'default',
   };
 
   componentWillUpdate(): void {
@@ -54,11 +54,15 @@ class Tooltip extends Component<Props> {
           timeout={{ appear: 100 }}
           classNames={{
             appear: styles.appear,
-            appearActive: styles.appearActive
+            appearActive: styles.appearActive,
           }}
         >
           <div className={className}>
-            {typeof this.props.text === 'string' ? <Text id={this.props.text} /> : this.props.text}
+            {typeof this.props.text === 'string' ? (
+              <Text id={this.props.text} />
+            ) : (
+              this.props.text
+            )}
           </div>
         </CSSTransition>
       </TransitionGroup>
@@ -79,14 +83,17 @@ class Tooltip extends Component<Props> {
     const options = {
       attachment: 'bottom center',
       targetAttachment: 'top center',
+      classes: {
+        element: styles.tetherElement,
+      },
       constraints: [
         {
           to: 'scrollParent',
           attachment: 'together',
-          pin: true
-        }
+          pin: true,
+        },
       ],
-      ...this.props.options
+      ...this.props.options,
     };
 
     return (

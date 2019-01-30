@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -12,12 +12,17 @@ import styles from './MessageMedia.css';
 export type Props = {
   className?: string,
   media: MessageMediaAudio,
-  maxWidth: number
+  maxWidth: number,
 };
 
 function MessageMediaVoice(props: Props) {
   const className = classNames(styles.container, styles.voice, props.className);
-  const { media: { content: { fileUrl, duration } }, maxWidth } = props;
+  const {
+    media: {
+      content: { fileUrl, duration },
+    },
+    maxWidth,
+  } = props;
 
   return (
     <Voice

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -24,12 +24,19 @@ export type Props = {
   pending: boolean,
   selector: SelectorState<PeerInfo>,
   autoFocus: boolean,
+  maxGroupSize: number,
+  error: ?string,
   onClose: () => mixed,
-  onSubmit: (gid: number, uids: number[]) => mixed,
-  onChange: (selector: SelectorState<PeerInfo>) => mixed
+  onSubmit: (group: Group, uids: number[]) => mixed,
+  onChange: (selector: SelectorState<PeerInfo>) => mixed,
+  isMaxGroupSizeVisible: boolean,
 };
 
 class AddMembersModal extends PureComponent<Props> {
+  static defaultProps = {
+    isMaxGroupSizeVisible: false,
+  };
+
   handleClose = (): void => {
     if (!this.props.pending) {
       this.props.onClose();
@@ -39,8 +46,8 @@ class AddMembersModal extends PureComponent<Props> {
   handleSubmit = (): void => {
     const selected = this.props.selector.getSelected();
     this.props.onSubmit(
-      this.props.group.id,
-      selected.map((contact) => contact.peer.id).toArray()
+      this.props.group,
+      selected.map((contact) => contact.peer.id).toArray(),
     );
   };
 
@@ -52,20 +59,97 @@ class AddMembersModal extends PureComponent<Props> {
     }
   };
 
+  isMaxGroupSizeExceeded(): boolean {
+    const {
+      maxGroupSize,
+      group: { type },
+    } = this.props;
+
+    const membersCount = this.getMembersCount();
+
+    return type === 'group' && membersCount > maxGroupSize;
+  }
+
+  getMembersCount = (): number => {
+    const {
+      selector,
+      group: { members },
+    } = this.props;
+
+    return members.length + selector.getSelected().size;
+  };
+
+  renderError() {
+    const { error } = this.props;
+    if (this.isMaxGroupSizeExceeded()) {
+      return (
+        <div className={styles.error}>
+          <Text id="CreateNewModal.group.error.max_group_size" />
+        </div>
+      );
+    }
+
+    if (!error) {
+      return null;
+    }
+
+    return (
+      <div className={styles.error}>
+        <Text id={error} />
+      </div>
+    );
+  }
+
+  renderMembersCount() {
+    const {
+      maxGroupSize,
+      isMaxGroupSizeVisible,
+      group: { type },
+    } = this.props;
+
+    if (type !== 'group') {
+      return null;
+    }
+
+    const membersCount = this.getMembersCount();
+    const membersCountClassNames = classNames(styles.membersCount, {
+      [styles.membersCountError]: this.isMaxGroupSizeExceeded(),
+    });
+
+    return (
+      <small className={membersCountClassNames}>
+        {`(${membersCount}${isMaxGroupSizeVisible ? '/' + maxGroupSize : ''})`}
+      </small>
+    );
+  }
+
   render() {
+    const {
+      maxGroupSize,
+      selector,
+      autoFocus,
+      pending,
+      group: { type },
+    } = this.props;
     const className = classNames(styles.container, this.props.className);
+    const membersCount = this.getMembersCount();
 
     return (
       <HotKeys onHotKey={this.handleHotkey}>
         <Modal className={className} onClose={this.handleClose}>
           <ModalHeader withBorder>
             <Text id="AddMembersModal.title" />
-            <ModalClose onClick={this.handleClose} id="add_members_close_button" />
+            {this.renderMembersCount()}
+            <ModalClose
+              onClick={this.handleClose}
+              id="add_members_close_button"
+            />
           </ModalHeader>
+          {this.renderError()}
           <ModalBody className={styles.body}>
             <ContactSelector
-              autoFocus={this.props.autoFocus}
-              selector={this.props.selector}
+              autoFocus={autoFocus}
+              selector={selector}
               onChange={this.props.onChange}
             />
           </ModalBody>
@@ -74,7 +158,11 @@ class AddMembersModal extends PureComponent<Props> {
               wide
               theme="success"
               rounded={false}
-              disabled={this.props.pending}
+              disabled={
+                selector.getSelected().size === 0 ||
+                (type === 'group' && membersCount > maxGroupSize)
+              }
+              loading={pending}
               onClick={this.handleSubmit}
               id="add_members_add_button"
             >

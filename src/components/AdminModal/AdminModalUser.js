@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -11,12 +11,20 @@ import styles from './AdminModal.css';
 import getAvatarPlaceholder from '../../utils/getAvatarPlaceholder';
 
 type Props = {
-  user: GroupMember
+  user: GroupMember,
 };
 
 class AdminModalUser extends PureComponent<Props> {
   render() {
-    const { user: { peerInfo: { title, avatar, peer: { id } } } } = this.props;
+    const {
+      user: {
+        peerInfo: {
+          title,
+          avatar,
+          peer: { id },
+        },
+      },
+    } = this.props;
     const placeholder = getAvatarPlaceholder(id);
 
     return (
@@ -29,7 +37,11 @@ class AdminModalUser extends PureComponent<Props> {
           placeholder={placeholder}
         />
         <div className={styles.info}>
-          <PeerInfoTitle title={title} className={styles.title} emojiSize={22} />
+          <PeerInfoTitle
+            title={title}
+            className={styles.title}
+            emojiSize={22}
+          />
         </div>
       </div>
     );

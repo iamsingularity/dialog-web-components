@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  */
 
 @import '../../styles/variables.css';
@@ -8,14 +8,14 @@
   --sidebar-footer-font-family: var(--default-font-family);
   --sidebar-footer-height: 54px;
   --sidebar-footer-background: #fff;
-  --sidebar-footer-border-color: color(#000 alpha(14%));
+  --sidebar-footer-border-color: color-mod(#000 alpha(14%));
   --sidebar-footer-button-color: #9e9e9e;
   --sidebar-footer-button-color-hover: #808080;
   --sidebar-footer-button-color-active: var(--color-primary);
   --sidebar-footer-button-counter-background: var(--color-danger);
   --sidebar-footer-button-counter-color: #fff;
-  --sidebar-footer-button-counter-size: 14px;
-  --sidebar-footer-button-counter-font-size: calc(var(--sidebar-footer-button-counter-size) - 6);
+  --sidebar-footer-button-counter-size: 16px;
+  --sidebar-footer-button-counter-font-size: 8px;
 }
 
 /* Reset */
@@ -40,7 +40,7 @@
 
 .button {
   flex: 1 1 auto;
-  @apply --flex-fix;
+  @mixin flex-fix;
   cursor: pointer;
   display: flex;
   align-content: center;
@@ -74,7 +74,7 @@
 .tooltip {
   flex: 1 1 auto;
   display: inline-flex;
-  @apply --flex-fix;
+  @mixin flex-fix;
 }
 
 .wrapper {
@@ -101,10 +101,11 @@
   align-content: center;
   align-items: center;
   justify-content: center;
+  font-weight: 500;
 }
 
 .counterBig {
-  font-size: calc(var(--sidebar-footer-button-counter-font-size) - 2);
+  font-size: calc(var(--sidebar-footer-button-counter-font-size) - 2px);
 }
 
 .update {

@@ -1,16 +1,16 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
 export type AutoSizerState = {
   width: number,
-  height: number
+  height: number,
 };
 
 export type ListRowProps = {
   index: number,
   key: string,
   style: { [key: string]: string },
-  isScrolling: boolean
+  isScrolling: boolean,
 };

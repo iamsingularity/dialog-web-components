@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -8,15 +8,13 @@ import classNames from 'classnames';
 import styles from './Dropdown.css';
 
 type Props = {
-  className?: string
+  className?: string,
 };
 
 function DropdownDivider(props: Props) {
   const className = classNames(styles.divider, props.className);
 
-  return (
-    <div className={className} />
-  );
+  return <div className={className} />;
 }
 
 export default DropdownDivider;

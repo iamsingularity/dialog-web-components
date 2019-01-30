@@ -1,11 +1,11 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  */
 
 @import '../../styles/variables.css';
 
 :root {
-  --call-fingerprint-z-index: calc(var(--z-index-call) + 15)
+  --call-fingerprint-z-index: calc(var(--z-index-call) + 15);
 }
 
 .container {
@@ -50,7 +50,7 @@
     margin: 0;
     padding: 6px;
     border-radius: var(--default-border-radius-small);
-    background-color: color(#fff alpha(15%));
+    background-color: color-mod(#fff alpha(15%));
     color: #fff;
   }
 }

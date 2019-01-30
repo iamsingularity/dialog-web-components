@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -13,7 +13,7 @@ type Props = {
   number: string,
   onChange: (number: string) => mixed,
   onFocus: () => mixed,
-  onBlur: () => mixed
+  onBlur: () => mixed,
 };
 
 class PadNumber extends PureComponent<Props> {

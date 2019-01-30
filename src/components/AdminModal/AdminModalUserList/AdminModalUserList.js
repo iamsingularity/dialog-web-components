@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -13,7 +13,7 @@ import SelectList from '../../SelectList/SelectList';
 
 type Props = {
   selector: SelectorState<GroupMember>,
-  onChange: (selector: SelectorState<GroupMember>) => mixed
+  onChange: (selector: SelectorState<GroupMember>) => mixed,
 };
 
 class AdminModalUserList extends PureComponent<Props> {
@@ -22,12 +22,7 @@ class AdminModalUserList extends PureComponent<Props> {
   };
 
   renderRow = ({ item, hovered }: *) => {
-    return (
-      <AdminModalUserListItem
-        user={item}
-        hovered={hovered}
-      />
-    );
+    return <AdminModalUserListItem user={item} hovered={hovered} />;
   };
 
   render() {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -8,14 +8,19 @@ import classNames from 'classnames';
 import Tab from './Tab';
 import styles from './Tabs.css';
 
-export type Props = {
-  className?: string,
-  current: string,
-  variants: Array<{ id: string, title: string }>,
-  onPick: (current: string) => mixed
+export type TabVariant<T> = {
+  id: T,
+  title: string,
 };
 
-class Tabs extends PureComponent<Props> {
+type Props<T> = {
+  variants: Array<TabVariant<T>>,
+  current: T,
+  className?: string,
+  onPick: (current: T) => mixed,
+};
+
+class Tabs<T: string> extends PureComponent<Props<T>> {
   render() {
     const { current, variants } = this.props;
     const className = classNames(styles.container, this.props.className);
@@ -34,11 +39,7 @@ class Tabs extends PureComponent<Props> {
       );
     });
 
-    return (
-      <ul className={className}>
-        {tabs}
-      </ul>
-    );
+    return <ul className={className}>{tabs}</ul>;
   }
 }
 

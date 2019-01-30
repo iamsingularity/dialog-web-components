@@ -1,10 +1,10 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
 import type { PeerInfo, GroupMember } from '@dlghq/dialog-types';
-import type { SelectorState } from './types';
+import type { SelectorState, SelectorStateCreator } from './types';
 import createSelectorState from './createSelectorState';
 
 function peerIntoToQueryString(info: PeerInfo): string {
@@ -15,16 +15,16 @@ function peerIntoToQueryString(info: PeerInfo): string {
   return info.title;
 }
 
-export const PeerInfoSelectorState = createSelectorState(
+export const PeerInfoSelectorState: SelectorStateCreator<PeerInfo> = createSelectorState(
   'PeerInfoSelectorState',
   peerIntoToQueryString,
-  true
+  true,
 );
 
-export const MemberSelectorState = createSelectorState(
+export const MemberSelectorState: SelectorStateCreator<GroupMember> = createSelectorState(
   'MemberSelectorState',
   (member: GroupMember) => peerIntoToQueryString(member.peerInfo),
-  true
+  true,
 );
 
 export type { SelectorState };

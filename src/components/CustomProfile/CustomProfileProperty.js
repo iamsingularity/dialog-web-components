@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -13,7 +13,7 @@ export type Props = {
   className?: string,
   type: string,
   value: mixed,
-  title: string
+  title: string,
 };
 
 class CustomProfileProperty extends PureComponent<Props> {
@@ -26,11 +26,7 @@ class CustomProfileProperty extends PureComponent<Props> {
 
       case 'number':
       case 'integer':
-        return (
-          <div className={styles.number}>
-            {String(value)}
-          </div>
-        );
+        return <div className={styles.number}>{String(value)}</div>;
 
       default:
         return (
@@ -46,9 +42,7 @@ class CustomProfileProperty extends PureComponent<Props> {
 
     return (
       <div className={className}>
-        <div className={styles.title}>
-          {this.props.title}
-        </div>
+        <div className={styles.title}>{this.props.title}</div>
         {this.renderValue()}
       </div>
     );

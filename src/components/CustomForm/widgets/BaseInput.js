@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -19,11 +19,11 @@ export type Props = {
   disabled: boolean,
   readonly: boolean,
   autofocus: boolean,
-  options: { [key: string]: string },
-  rawErrors?: string[],
+  options: { [key: string]: any },
+  rawErrors?: Array<string>,
   onChange: (value: mixed) => mixed,
   onBlur: (id: string, value: mixed) => mixed,
-  onFocus: (id: string, value: mixed) => mixed
+  onFocus: (id: string, value: mixed) => mixed,
 };
 
 class BaseInput extends PureComponent<Props> {
@@ -32,7 +32,7 @@ class BaseInput extends PureComponent<Props> {
     required: false,
     disabled: false,
     readonly: false,
-    autofocus: false
+    autofocus: false,
   };
 
   handleChange = (value: *) => {
@@ -54,7 +54,7 @@ class BaseInput extends PureComponent<Props> {
   getStatus = (): InputStatus => {
     const { rawErrors } = this.props;
 
-    if (rawErrors) {
+    if (rawErrors && rawErrors.length) {
       return 'error';
     }
 
@@ -62,9 +62,12 @@ class BaseInput extends PureComponent<Props> {
   };
 
   getHint = (): ?string => {
-    const { rawErrors, options: { help } } = this.props;
+    const {
+      rawErrors,
+      options: { help },
+    } = this.props;
 
-    if (rawErrors) {
+    if (rawErrors && rawErrors.length) {
       return rawErrors.toString();
     }
 
@@ -76,7 +79,18 @@ class BaseInput extends PureComponent<Props> {
   };
 
   render() {
-    const { id, label, placeholder, value, readonly, disabled, autofocus, options, required, type } = this.props;
+    const {
+      id,
+      label,
+      placeholder,
+      value,
+      readonly,
+      disabled,
+      autofocus,
+      options,
+      required,
+      type,
+    } = this.props;
 
     return (
       <Input
@@ -97,6 +111,8 @@ class BaseInput extends PureComponent<Props> {
         onFocus={this.handleFocus}
         status={this.getStatus()}
         hint={this.getHint()}
+        rows={options.rows}
+        prefix={options.prefix}
       />
     );
   }

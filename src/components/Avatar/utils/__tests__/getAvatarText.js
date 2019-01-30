@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -11,7 +11,7 @@ describe('getAvatarText', () => {
   });
 
   test('should return two letter from more than two words', () => {
-    expect(getAvatarText('Test User With Three World')).toEqual('TU');
+    expect(getAvatarText('Test User With Three Word')).toEqual('TU');
   });
 
   test('should return one letter from one word', () => {

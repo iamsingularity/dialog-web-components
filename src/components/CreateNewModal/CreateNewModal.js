@@ -1,8 +1,7 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
-
 
 import type { PeerInfo } from '@dlghq/dialog-types';
 import type { Props } from './types';
@@ -27,7 +26,8 @@ import HotKeys from '../HotKeys/HotKeys';
 class CreateNewModal extends PureComponent<Props> {
   static defaultProps = {
     id: 'create_new_modal',
-    isPublicGroupsEnabled: true
+    isPublicGroupsEnabled: true,
+    isMaxGroupSizeVisible: false,
   };
 
   handlePrevStepClick = (): void => {
@@ -57,21 +57,21 @@ class CreateNewModal extends PureComponent<Props> {
   handleChange = (value: string, { target }: SyntheticInputEvent<>) => {
     this.props.onRequestChange({
       ...this.props.request,
-      [target.name]: value
+      [target.name]: value,
     });
   };
 
   handleMembersChange = (members: SelectorState<PeerInfo>): void => {
     this.props.onRequestChange({
       ...this.props.request,
-      members
+      members,
     });
   };
 
   handleAvatarChange = (avatar: File): void => {
     this.props.onRequestChange({
       ...this.props.request,
-      avatar
+      avatar,
     });
     this.props.onStepChange('info');
   };
@@ -79,14 +79,14 @@ class CreateNewModal extends PureComponent<Props> {
   handleAvatarRemove = (): void => {
     this.props.onRequestChange({
       ...this.props.request,
-      avatar: null
+      avatar: null,
     });
   };
 
   handleAvatarEdit = (avatar: File): void => {
     this.props.onRequestChange({
       ...this.props.request,
-      avatar
+      avatar,
     });
     this.props.onStepChange('avatar');
   };
@@ -120,8 +120,26 @@ class CreateNewModal extends PureComponent<Props> {
     }
   };
 
+  isMaxGroupSizeExceeded(): boolean {
+    const {
+      maxGroupSize,
+      request: { type, members },
+    } = this.props;
+    const membersCount = members.getSelected().size;
+
+    return type === 'group' && membersCount > maxGroupSize;
+  }
+
   renderError() {
     const { error } = this.props;
+
+    if (this.isMaxGroupSizeExceeded()) {
+      return (
+        <div className={styles.error}>
+          <Text id="CreateNewModal.group.error.max_group_size" />
+        </div>
+      );
+    }
 
     if (!error) {
       return null;
@@ -129,24 +147,35 @@ class CreateNewModal extends PureComponent<Props> {
 
     return (
       <div className={styles.error}>
-        {error}
+        <Text id={error} />
       </div>
     );
   }
 
   renderTypeStep() {
-    const { id, request: { type }, step } = this.props;
+    const {
+      id,
+      maxGroupSize,
+      request: { type },
+      step,
+    } = this.props;
 
     return (
       <div className={styles.wrapper}>
         <ModalHeader className={styles.header} withBorder>
           <Text id={`CreateNewModal.${type}.title`} />
-          <ModalClose pending={this.props.pending} onClick={this.props.onClose} id={`${this.props.id}_close_button`} />
+          <ModalClose
+            pending={this.props.pending}
+            onClick={this.props.onClose}
+            id={`${this.props.id}_close_button`}
+          />
         </ModalHeader>
+        {this.renderError()}
         <ModalBody className={styles.body}>
           <CreateGroupTypeForm
             id={id}
             type={type}
+            maxGroupSize={maxGroupSize}
             onChange={this.handleChange}
             onSubmit={this.handleNextStepClick}
           />
@@ -169,7 +198,12 @@ class CreateNewModal extends PureComponent<Props> {
   }
 
   renderInfoStep() {
-    const { id, step, request: { type, about, title, shortname, avatar }, shortnamePrefix } = this.props;
+    const {
+      id,
+      step,
+      request: { type, about, title, shortname, avatar },
+      shortnamePrefix,
+    } = this.props;
 
     return (
       <div className={styles.wrapper}>
@@ -180,7 +214,11 @@ class CreateNewModal extends PureComponent<Props> {
             className={styles.back}
           />
           <Text id={`CreateNewModal.${type}.title`} />
-          <ModalClose pending={this.props.pending} onClick={this.props.onClose} id={`${this.props.id}_close_button`} />
+          <ModalClose
+            pending={this.props.pending}
+            onClick={this.props.onClose}
+            id={`${this.props.id}_close_button`}
+          />
         </ModalHeader>
         {this.renderError()}
         <ModalBody className={styles.body}>
@@ -217,7 +255,9 @@ class CreateNewModal extends PureComponent<Props> {
   }
 
   renderAvatarStep() {
-    const { request: { avatar } } = this.props;
+    const {
+      request: { avatar },
+    } = this.props;
 
     if (avatar && typeof avatar !== 'string') {
       return (
@@ -253,8 +293,34 @@ class CreateNewModal extends PureComponent<Props> {
     return null;
   }
 
+  renderMembersCount() {
+    const {
+      request: { type, members },
+      maxGroupSize,
+      isMaxGroupSizeVisible,
+    } = this.props;
+
+    if (type !== 'group') {
+      return null;
+    }
+
+    const membersCount = members.getSelected().size;
+    const membersCountClassNames = classNames(styles.membersCount, {
+      [styles.membersCountError]: this.isMaxGroupSizeExceeded(),
+    });
+
+    return (
+      <small className={membersCountClassNames}>
+        {`(${membersCount}${isMaxGroupSizeVisible ? '/' + maxGroupSize : ''})`}
+      </small>
+    );
+  }
+
   renderMembersStep() {
-    const { id, request: { type, members } } = this.props;
+    const {
+      id,
+      request: { type, members },
+    } = this.props;
 
     return (
       <div className={styles.wrapper}>
@@ -266,31 +332,29 @@ class CreateNewModal extends PureComponent<Props> {
             id={`${id}_back_button`}
           />
           <Text id={`CreateNewModal.${type}.title`} />
+          {this.renderMembersCount()}
           <ModalClose
             pending={this.props.pending}
             onClick={this.props.onClose}
             id={`${id}_close_button`}
           />
         </ModalHeader>
+        {this.renderError()}
         <ModalBody className={styles.body}>
           <CreateGroupMembersForm
-            id={id}
             members={members}
             autoFocus={this.props.autoFocus}
             onChange={this.handleMembersChange}
-            onSubmit={this.handleSubmit}
           />
         </ModalBody>
         <ModalFooter className={styles.footer}>
           <Button
-            className={styles.halfButton}
             onClick={this.handleSubmit}
             rounded={false}
-            form={id}
             type="submit"
             theme="success"
             loading={this.props.pending}
-            disabled={this.props.pending}
+            disabled={this.isMaxGroupSizeExceeded() || this.props.pending}
             id={`${id}_finish_button`}
             wide
           >

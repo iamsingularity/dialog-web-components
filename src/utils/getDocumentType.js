@@ -1,11 +1,16 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
 /* eslint-disable complexity */
 
-export type DocumentType = 'unknown' | 'document' | 'media' | 'picture' | 'compressed';
+export type DocumentType =
+  | 'unknown'
+  | 'document'
+  | 'media'
+  | 'picture'
+  | 'compressed';
 
 function getDocumentType(mime: string): DocumentType {
   const [type, subtype] = mime.split('/');

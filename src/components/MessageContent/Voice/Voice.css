@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  */
 
 @import '../../../styles/variables.css';
@@ -10,7 +10,7 @@
   --message-voice-padding: 12px;
   --message-voice-border-radius: var(--default-border-radius);
   --message-voice-background-color: #fff;
-  --message-voice-border-color: color(#000 alpha(15%));
+  --message-voice-border-color: color-mod(#000 alpha(15%));
 }
 
 /* Reset */

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -9,9 +9,7 @@ import { random } from 'lodash';
 
 function SidebarFakeItem() {
   function renderAvatar() {
-    return (
-      <div className={styles.avatar} />
-    );
+    return <div className={styles.avatar} />;
   }
 
   function renderText() {
@@ -28,9 +26,7 @@ function SidebarFakeItem() {
       return null;
     }
 
-    return (
-      <div className={styles.counter} />
-    );
+    return <div className={styles.counter} />;
   }
 
   return (

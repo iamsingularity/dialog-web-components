@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  */
 
 @import '../../styles/variables.css';
@@ -60,5 +60,5 @@
   font-size: var(--sidebar-menu-profile-status-font-size);
   text-transform: lowercase;
   color: currentColor;
-  @apply --text-overflow-ellipsis;
+  @mixin text-overflow-ellipsis;
 }

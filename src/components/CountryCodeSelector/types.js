@@ -1,12 +1,12 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
 export type Country = {
   alpha: string,
   code: string,
-  flag: ?string
+  flag: ?string,
 };
 
 export type Props = {
@@ -15,5 +15,5 @@ export type Props = {
   countries: Country[],
   label: ?string,
   disabled: boolean,
-  onChange: (value: Country) => void
+  onChange: (value: Country) => void,
 };

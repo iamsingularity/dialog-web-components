@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -30,12 +30,13 @@ export type Props = {
   onChange: () => void,
   onSubmit: () => void,
   onAvatarChange: (avatar: File) => void,
-  onAvatarRemove: () => void
+  onAvatarRemove: () => void,
+  aboutMaxLength?: number,
 };
 
 export type State = {
   avatar: ?string,
-  isPublic: boolean
+  isPublic: boolean,
 };
 
 export type Context = ProviderContext;
@@ -44,12 +45,13 @@ class EditGroupModalForm extends PureComponent<Props, State> {
   shortnameInput: ?InputNext;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   static defaultProps = {
     vertical: false,
-    id: 'edit_group'
+    id: 'edit_group',
+    aboutMaxLength: 3000,
   };
 
   constructor(props: Props, context: Context) {
@@ -58,12 +60,18 @@ class EditGroupModalForm extends PureComponent<Props, State> {
     if (!props.avatar || typeof props.avatar === 'string') {
       this.state = {
         avatar: props.avatar,
-        isPublic: props.shortname && Boolean(props.shortname.value) && props.shortname.value !== ''
+        isPublic:
+          props.shortname &&
+          Boolean(props.shortname.value) &&
+          props.shortname.value !== '',
       };
     } else {
       this.state = {
         avatar: null,
-        isPublic: props.shortname && Boolean(props.shortname.value) && props.shortname.value !== ''
+        isPublic:
+          props.shortname &&
+          Boolean(props.shortname.value) &&
+          props.shortname.value !== '',
       };
       fileToBase64(props.avatar, (avatar) => {
         this.setState({ avatar });
@@ -103,7 +111,7 @@ class EditGroupModalForm extends PureComponent<Props, State> {
     if (this.props[field].error) {
       return {
         status: 'error',
-        hint: this.props[field].error
+        hint: this.props[field].error,
       };
     }
 
@@ -123,7 +131,7 @@ class EditGroupModalForm extends PureComponent<Props, State> {
     return (
       <div className={styles.avatarBlock}>
         <AvatarSelector
-          name={name.value}
+          title={name.value}
           placeholder={group.placeholder}
           avatar={avatar}
           size={140}
@@ -167,19 +175,23 @@ class EditGroupModalForm extends PureComponent<Props, State> {
   }
 
   render() {
-    const { group, about, name, vertical, id } = this.props;
+    const { group, about, name, vertical, id, aboutMaxLength } = this.props;
     const className = classNames(
       styles.info,
       {
-        [styles.vertical]: vertical
+        [styles.vertical]: vertical,
       },
-      this.props.className
+      this.props.className,
     );
 
     return (
       <div className={className}>
         {this.renderAvatar()}
-        <form className={styles.form} autoComplete="off" onSubmit={this.handleSubmit}>
+        <form
+          className={styles.form}
+          autoComplete="off"
+          onSubmit={this.handleSubmit}
+        >
           <InputNext
             className={styles.input}
             id={`${id}_name`}
@@ -198,8 +210,11 @@ class EditGroupModalForm extends PureComponent<Props, State> {
             name="about"
             status={about.error ? 'error' : 'normal'}
             onChange={this.props.onChange}
+            maxLength={aboutMaxLength}
             label={`CreateNewModal.${group.type}.info.description.label`}
-            placeholder={`CreateNewModal.${group.type}.info.description.placeholder`}
+            placeholder={`CreateNewModal.${
+              group.type
+            }.info.description.placeholder`}
             type="textarea"
             value={about.value || ''}
             {...this.getInputState('about')}

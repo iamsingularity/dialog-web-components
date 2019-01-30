@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -10,19 +10,19 @@ import styles from './Modal.css';
 export type Props = {
   className?: string,
   withBorder?: boolean,
-  children: React.Node
+  children: React.Node,
 };
 
 function ModalHeader(props: Props) {
-  const className = classNames(styles.header, {
-    [styles.border]: props.withBorder
-  }, props.className);
-
-  return (
-    <header className={className}>
-      {props.children}
-    </header>
+  const className = classNames(
+    styles.header,
+    {
+      [styles.border]: props.withBorder,
+    },
+    props.className,
   );
+
+  return <header className={className}>{props.children}</header>;
 }
 
 export default ModalHeader;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -16,14 +16,14 @@ export type Props = {
   className?: string,
   autoFocus: boolean,
   selector: SelectorState<PeerInfo>,
-  onChange: (selector: SelectorState<PeerInfo>) => mixed
+  onChange: (selector: SelectorState<PeerInfo>) => mixed,
 };
 
 class ContactSelectorInput extends PureComponent<Props> {
   input: ?HTMLInputElement;
 
   static contextTypes = {
-    l10n: LocalizationContextType
+    l10n: LocalizationContextType,
   };
 
   componentDidMount() {
@@ -40,6 +40,10 @@ class ContactSelectorInput extends PureComponent<Props> {
 
   handleKeyDown = (event: SyntheticKeyboardEvent<>): void => {
     this.props.onChange(this.props.selector.handleKeyboardEvent(event));
+  };
+
+  handleDelete = (contact: PeerInfo): void => {
+    this.props.onChange(this.props.selector.deleteSelected(contact));
   };
 
   getPlaceholder(): string {
@@ -60,7 +64,13 @@ class ContactSelectorInput extends PureComponent<Props> {
     const selected = this.props.selector.getSelected().toArray();
 
     return selected.map((contact) => {
-      return <ContactSelectorChip key={contact.peer.id} contact={contact} />;
+      return (
+        <ContactSelectorChip
+          key={contact.peer.id}
+          contact={contact}
+          onDelete={this.handleDelete}
+        />
+      );
     });
   }
 

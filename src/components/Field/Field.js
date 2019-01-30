@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -9,18 +9,14 @@ import styles from './Field.css';
 
 export type Props = {
   className?: string,
-  children: Node
-}
+  children: Node,
+};
 
 class Field extends PureComponent<Props> {
   render() {
     const className = classNames(styles.container, this.props.className);
 
-    return (
-      <div className={className}>
-        {this.props.children}
-      </div>
-    );
+    return <div className={className}>{this.props.children}</div>;
   }
 }
 

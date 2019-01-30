@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -17,8 +17,4 @@ function hasVideos(call: Call): boolean {
   return Boolean(hasOwnVideos(call) || hasTheirVideos(call));
 }
 
-export {
-  hasVideos,
-  hasOwnVideos,
-  hasTheirVideos
-};
+export { hasVideos, hasOwnVideos, hasTheirVideos };

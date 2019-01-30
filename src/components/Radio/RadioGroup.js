@@ -1,18 +1,22 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
 import React, { PureComponent, type Node } from 'react';
-import PropTypes from 'prop-types';
 
-export type Props = {
+import { RadioGroupContext } from './RadioGroupContext';
+
+export type RadioGroupProps = {
   className?: string,
-  disabled?: boolean,
+  disabled: boolean,
   children: Node,
-  name: string,
+  name?: string,
   value: string,
-  onChange: (value: string, event: SyntheticInputEvent<HTMLInputElement>) => mixed
+  onChange: (
+    value: string,
+    event: SyntheticInputEvent<HTMLInputElement>,
+  ) => mixed,
 };
 
 export type Context = {
@@ -20,31 +24,25 @@ export type Context = {
     name: string,
     value: string,
     disabled?: boolean,
-    onChange: (value: string, event: SyntheticInputEvent<HTMLInputElement>) => mixed
-  }
+    onChange: (
+      value: string,
+      event: SyntheticInputEvent<HTMLInputElement>,
+    ) => mixed,
+  },
 };
 
-class RadioGroup extends PureComponent<Props> {
-  static childContextTypes = {
-    radioGroup: PropTypes.object.isRequired
+class RadioGroup extends PureComponent<RadioGroupProps> {
+  static defaultProps = {
+    disabled: false,
   };
 
-  getChildContext(): Context {
-    return {
-      radioGroup: {
-        name: this.props.name,
-        value: this.props.value,
-        onChange: this.props.onChange,
-        disabled: this.props.disabled
-      }
-    };
-  }
-
   render() {
+    const { value, name, onChange, disabled } = this.props;
+
     return (
-      <div className={this.props.className}>
-        {this.props.children}
-      </div>
+      <RadioGroupContext.Provider value={{ value, name, onChange, disabled }}>
+        <div className={this.props.className}>{this.props.children}</div>
+      </RadioGroupContext.Provider>
     );
   }
 }

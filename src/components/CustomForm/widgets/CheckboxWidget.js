@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -15,12 +15,15 @@ type Props = {
   options: { [key: string]: * },
   required: boolean,
   disabled: boolean,
-  onChange: (value: mixed) => mixed
+  onChange: (value: mixed) => mixed,
 };
 
 class CheckboxWidget extends PureComponent<Props> {
   getHint = (): ?string => {
-    const { rawErrors, options: { help } } = this.props;
+    const {
+      rawErrors,
+      options: { help },
+    } = this.props;
 
     if (rawErrors) {
       return rawErrors.toString();

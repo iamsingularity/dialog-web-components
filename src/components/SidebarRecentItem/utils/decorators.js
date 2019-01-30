@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -9,16 +9,9 @@ import {
   italic,
   strike,
   emoji,
-  namedEmoji
+  namedEmoji,
 } from '@dlghq/markdown/src/decorators';
 
-const decorators = [
-  code,
-  bold,
-  italic,
-  strike,
-  emoji,
-  namedEmoji
-];
+const decorators = [code, bold, italic, strike, emoji, namedEmoji];
 
 export default decorators;

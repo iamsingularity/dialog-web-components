@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -11,7 +11,7 @@ import styles from './Authorization.css';
 
 export type Props = {
   id: string,
-  errors: ?{ [field: string]: AuthError }
+  errors: ?{ [field: string]: AuthError },
 };
 
 class AuthorizationByCertificate extends PureComponent<Props> {

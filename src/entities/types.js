@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -27,5 +27,5 @@ export interface SelectorState<T> {
 }
 
 export type SelectorStateCreator<T> = {
-  create(items: T[]): SelectorState<T>
+  create(items: Array<T>): SelectorState<T>,
 };

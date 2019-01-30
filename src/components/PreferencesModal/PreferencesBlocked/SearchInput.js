@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -9,8 +9,8 @@ import Field from '../../Field/Field';
 
 export type Props = {
   onChange: (value: string) => void,
-  placeholder: string
-}
+  placeholder: string,
+};
 
 class SearchInput extends PureComponent<Props> {
   handleChange: () => void;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -14,15 +14,15 @@ export type Props = {
   value: boolean,
   disabled: boolean,
   tabIndex?: number,
-  onChange: (event: SyntheticInputEvent<>) => mixed
-}
+  onChange: (event: SyntheticInputEvent<>) => mixed,
+};
 
 class Checkbox extends PureComponent<Props> {
   input: ?HTMLInputElement;
 
   static defaultProps = {
     value: false,
-    disabled: false
+    disabled: false,
   };
 
   setInput = (input: ?HTMLInputElement): void => {
@@ -45,7 +45,7 @@ class Checkbox extends PureComponent<Props> {
     const { id, value, label, disabled, tabIndex, onChange } = this.props;
     const className = classNames(styles.container, this.props.className, {
       [styles.checked]: value,
-      [styles.disabled]: disabled
+      [styles.disabled]: disabled,
     });
 
     return (

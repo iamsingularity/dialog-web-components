@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -9,17 +9,13 @@ import styles from './SidebarHeader.css';
 
 export type Props = {
   className?: string,
-  children: Node
+  children: Node,
 };
 
 function SidebarHeader(props: Props) {
   const className = classNames(styles.container, props.className);
 
-  return (
-    <header className={className}>
-      {props.children}
-    </header>
-  );
+  return <header className={className}>{props.children}</header>;
 }
 
 export default SidebarHeader;

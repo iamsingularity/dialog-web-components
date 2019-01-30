@@ -1,10 +1,13 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 /* eslint max-lines: ["error", 500] */
 
-import type { MessageState as MessageStateType, PeerInfo } from '@dlghq/dialog-types';
+import type {
+  MessageState as MessageStateType,
+  PeerInfo,
+} from '@dlghq/dialog-types';
 import type { Props, State } from './types';
 import classNames from 'classnames';
 import React, { PureComponent } from 'react';
@@ -25,7 +28,7 @@ class Message extends PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      hover: false
+      hover: false,
     };
   }
 
@@ -92,7 +95,10 @@ class Message extends PureComponent<Props, State> {
   };
 
   isSelectionMode(): boolean {
-    return Boolean(this.props.isSelectionEnabled) && typeof this.props.selected === 'boolean';
+    return (
+      Boolean(this.props.isSelectionEnabled) &&
+      typeof this.props.selected === 'boolean'
+    );
   }
 
   isHover(): boolean {
@@ -123,6 +129,7 @@ class Message extends PureComponent<Props, State> {
         fullTime={message.fullDate}
         isEdited={message.isEdited && message.content.type !== 'deleted'}
         onClick={this.handleForceSelect}
+        className={styles.state}
       />
     );
   }
@@ -134,7 +141,9 @@ class Message extends PureComponent<Props, State> {
       return null;
     }
 
-    const onClick = this.props.onAvatarClick ? this.handleAvatarClick : undefined;
+    const onClick = this.props.onAvatarClick
+      ? this.handleAvatarClick
+      : undefined;
 
     return (
       <div className={styles.avatar}>
@@ -159,7 +168,9 @@ class Message extends PureComponent<Props, State> {
           titleClassName={styles.title}
           userNameClassName={styles.username}
           onTitleClick={this.props.onTitleClick ? this.handleTitleClick : null}
-          onUserNameClick={this.props.onMentionClick ? this.handleMentionClick : null}
+          onUserNameClick={
+            this.props.onMentionClick ? this.handleMentionClick : null
+          }
           addSpacebars
         />
         {this.renderState()}
@@ -168,7 +179,9 @@ class Message extends PureComponent<Props, State> {
   }
 
   renderShortHeader() {
-    const { message: { date } } = this.props;
+    const {
+      message: { date },
+    } = this.props;
     const sender = this.getSender();
     if (!sender) {
       return null;
@@ -176,11 +189,7 @@ class Message extends PureComponent<Props, State> {
 
     const username = sender.userName ? ` @${sender.userName}` : '';
 
-    return (
-      <CopyOnly>
-        {sender.title + username + ' ' + date}
-      </CopyOnly>
-    );
+    return <CopyOnly>{sender.title + username + ' ' + date}</CopyOnly>;
   }
 
   renderActions() {
@@ -201,7 +210,10 @@ class Message extends PureComponent<Props, State> {
 
     if (this.isHover() && renderActions) {
       return (
-        <div className={styles.actions} id={`message_${this.props.message.rid}_actions`}>
+        <div
+          className={styles.actions}
+          id={`message_${this.props.message.rid}_actions`}
+        >
           {renderActions()}
         </div>
       );
@@ -235,16 +247,20 @@ class Message extends PureComponent<Props, State> {
       );
     });
 
-    return (
-      <div className={styles.reactions}>
-        {children}
-      </div>
-    );
+    return <div className={styles.reactions}>{children}</div>;
   }
 
   renderReply() {
-    const { message: { content, attachment }, maxWidth, maxHeight } = this.props;
-    if (attachment && attachment.type === 'reply' && content.type !== 'deleted') {
+    const {
+      message: { content, attachment },
+      maxWidth,
+      maxHeight,
+    } = this.props;
+    if (
+      attachment &&
+      attachment.type === 'reply' &&
+      content.type !== 'deleted'
+    ) {
       return (
         <MessageAttachmentReply
           className={styles.reply}
@@ -261,8 +277,16 @@ class Message extends PureComponent<Props, State> {
   }
 
   renderForward() {
-    const { message: { content, attachment }, maxWidth, maxHeight } = this.props;
-    if (attachment && attachment.type === 'forward' && content.type !== 'deleted') {
+    const {
+      message: { content, attachment },
+      maxWidth,
+      maxHeight,
+    } = this.props;
+    if (
+      attachment &&
+      attachment.type === 'forward' &&
+      content.type !== 'deleted'
+    ) {
       return (
         <MessageFlattenAttachment
           className={styles.forward}
@@ -280,7 +304,13 @@ class Message extends PureComponent<Props, State> {
   }
 
   render() {
-    const { short, message: { content, rid }, highlight, maxWidth, maxHeight } = this.props;
+    const {
+      short,
+      message: { content, rid },
+      highlight,
+      maxWidth,
+      maxHeight,
+    } = this.props;
     const hover = this.isHover();
     const state = this.getState();
     const isError = state === 'error';
@@ -295,13 +325,21 @@ class Message extends PureComponent<Props, State> {
       isError ? styles.error : null,
       isUnread ? styles.unread : null,
       highlight ? styles.highlight : null,
-      this.isSelectionMode() ? styles.selectable : null
+      this.isSelectionMode() ? styles.selectable : null,
     );
 
-    const contentWrapperClassName = classNames(styles.content, styles[content.type]);
+    const contentWrapperClassName = classNames(
+      styles.content,
+      styles[content.type],
+    );
 
     return (
-      <Hover id={`message_${rid}`} className={className} onHover={this.handleHover} onClick={this.handleSelect}>
+      <Hover
+        id={`message_${rid}`}
+        className={className}
+        onHover={this.handleHover}
+        onClick={this.handleSelect}
+      >
         <CopyOnly block />
         {this.renderActions()}
         <div className={styles.info}>
@@ -318,7 +356,9 @@ class Message extends PureComponent<Props, State> {
               isPending={isPending}
               maxWidth={maxWidth}
               maxHeight={maxHeight}
-              onLightboxOpen={this.props.onLightboxOpen ? this.handleLightboxOpen : undefined}
+              onLightboxOpen={
+                this.props.onLightboxOpen ? this.handleLightboxOpen : undefined
+              }
               onInteractiveAction={this.props.onInteractiveAction}
             />
             {this.renderForward()}

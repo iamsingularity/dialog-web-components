@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -10,12 +10,12 @@ import styles from './Location.css';
 export type Props = {|
   latitude: number,
   longitude: number,
-  maxWidth: number
+  maxWidth: number,
 |};
 
 class Location extends PureComponent<Props> {
   static defaultProps = {
-    maxWidth: 400
+    maxWidth: 400,
   };
 
   render() {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 dialog LLC <info@dlg.im>
+ * Copyright 2019 dialog LLC <info@dlg.im>
  * @flow
  */
 
@@ -16,14 +16,14 @@ export type Props = {
   children: Node,
   icon?: ?{
     glyph: string,
-    theme: ColorTheme
+    theme: ColorTheme,
   },
   value: boolean,
-  onChange: (value: boolean) => void
+  onChange: (value: boolean) => mixed,
 };
 
 class ActivityListSwitcher extends PureComponent<Props> {
-  handleClick = (event: SyntheticEvent<>): void => {
+  handleClick = (event: SyntheticMouseEvent<>): void => {
     event.preventDefault();
     this.props.onChange(!this.props.value);
   };
@@ -47,14 +47,16 @@ class ActivityListSwitcher extends PureComponent<Props> {
   }
 
   render() {
-    const className = classNames(styles.item, styles.clickable, this.props.className);
+    const className = classNames(
+      styles.item,
+      styles.clickable,
+      this.props.className,
+    );
 
     return (
       <div className={className} onClick={this.handleClick} id={this.props.id}>
         {this.renderIcon()}
-        <div className={styles.content}>
-          {this.props.children}
-        </div>
+        <div className={styles.content}>{this.props.children}</div>
         <Switcher
           id={`${this.props.id}_switcher`}
           name={`${this.props.id}_switcher`}

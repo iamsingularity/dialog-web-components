@@ -1,0 +1,21 @@
+title: Создать новый спейс
+info:
+  title:
+    label: Название спейса
+    placeholder: Назовите этот спейс
+
+  shortname:
+    label: Ссылка на спейс
+    placeholder: link
+  description:
+    label: Описание - не обязательно
+    placeholder: Назначение данного спейса
+public: Создать публичный спейс
+
+finish: Создать спейс
+
+next:
+  type: Добавить информацию
+  info: Добавить пользователей
+
+avatar_edit: Редактировать аватар
