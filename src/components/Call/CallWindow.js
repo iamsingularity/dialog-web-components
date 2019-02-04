@@ -6,6 +6,7 @@
 import type { CallProps as Props } from './types';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
+import { Text } from '@dlghq/react-l10n';
 import Hover from '../Hover/Hover';
 import CallControls from '../CallControls/CallControls';
 import CallVideo from '../CallVideo/CallVideo';
@@ -22,6 +23,11 @@ type State = {
 };
 
 class CallWindow extends PureComponent<Props, State> {
+  static defaultProps = {
+    avatarSize: 136,
+    showCallDirectionLabel: false,
+  };
+
   constructor(props: Props) {
     super(props);
 
@@ -82,16 +88,31 @@ class CallWindow extends PureComponent<Props, State> {
     return <CallVideo theirVideos={call.theirVideos} />;
   }
 
+  renderCallDirectionLabel() {
+    if (this.props.showCallDirectionLabel) {
+      const suffix = this.props.call.isOutgoing
+        ? 'outgoing_call'
+        : 'incoming_call';
+
+      return (
+        <Text className={styles.callDirectionLabel} id={`Call.${suffix}`} />
+      );
+    }
+
+    return null;
+  }
+
   renderContent() {
-    const { call } = this.props;
+    const { call, avatarSize } = this.props;
 
     if (!isOnCall(call.state)) {
       return (
         <div className={styles.content}>
           <div className={styles.info}>
+            {this.renderCallDirectionLabel()}
             <CallAvatar
               animated
-              size={136}
+              size={avatarSize}
               peer={call.peer}
               state={call.state}
               onClick={this.isSIP() ? undefined : this.handleGoToPeer}

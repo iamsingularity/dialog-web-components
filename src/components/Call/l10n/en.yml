@@ -6,3 +6,5 @@ connecting: connecting…
 ended: call ended
 unknown: unknown
 fingerprint: Your call is secured if you see the same emojis as our opponent
+outgoing_call: Outgoing call
+incoming_call: Incoming call
