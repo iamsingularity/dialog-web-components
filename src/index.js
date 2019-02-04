@@ -72,7 +72,7 @@ export {
 export { default as Toolbar } from './components/Toolbar/Toolbar';
 export { default as ToolbarAvatar } from './components/Toolbar/ToolbarAvatar';
 export { default as ToolbarButtons } from './components/Toolbar/ToolbarButtons';
-export { default as ToolbarInfo } from './components/Toolbar/ToolbarInfo';
+export * from './components/Toolbar/ToolbarInfo';
 export {
   default as ToolbarInfoButton,
 } from './components/ToolbarInfoButton/ToolbarInfoButton';
