@@ -9,7 +9,7 @@ import { Text } from '@dlghq/react-l10n';
 import classNames from 'classnames';
 import Avatar from '../Avatar/Avatar';
 import Markdown from '../Markdown/Markdown';
-import PeerInfoTitle from '../PeerInfoTitle/PeerInfoTitle';
+import { PeerInfoTitle } from '../PeerInfoTitle/PeerInfoTitle';
 import CustomProfile from '../CustomProfile/CustomProfile';
 import { UserOnline, type UserOnlineState } from '../UserOnline/UserOnline';
 import { ActivityUserProfileContacts } from './ActivityUserProfileContacts/ActivityUserProfileContacts';

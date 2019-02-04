@@ -6,7 +6,7 @@
 import type { ProviderContext } from '@dlghq/react-l10n';
 import React, { PureComponent } from 'react';
 import { Text, LocalizationContextType } from '@dlghq/react-l10n';
-import PeerInfoTitle from '../../PeerInfoTitle/PeerInfoTitle';
+import { PeerInfoTitle } from '../../PeerInfoTitle/PeerInfoTitle';
 import formatDate from 'date-fns/format';
 import getLocalDateTimeFormat from '../../../utils/getLocalDateTimeFormat';
 import getDateFnsLocale from '../../../utils/getDateFnsLocale';

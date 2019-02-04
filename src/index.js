@@ -12,9 +12,7 @@ export { default as PeerAvatar } from './components/PeerAvatar/PeerAvatar';
 export {
   default as PeerAvatarDouble,
 } from './components/PeerAvatarDouble/PeerAvatarDouble';
-export {
-  default as PeerInfoTitle,
-} from './components/PeerInfoTitle/PeerInfoTitle';
+export * from './components/PeerInfoTitle/PeerInfoTitle';
 export { default as Scroller } from './components/Scroller/Scroller';
 export { default as Dropdown } from './components/Dropdown/Dropdown';
 export {
