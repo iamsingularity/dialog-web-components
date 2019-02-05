@@ -64,7 +64,13 @@ class ActivityMediaPhoto extends PureComponent<Props> {
       return null;
     }
 
-    return <PeerInfoTitle title={sender} emojiSize={13} />;
+    return (
+      <PeerInfoTitle
+        title={sender}
+        emojiSize={13}
+        className={styles.peerInfo}
+      />
+    );
   }
 
   render() {

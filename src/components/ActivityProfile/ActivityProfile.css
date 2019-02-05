@@ -39,9 +39,13 @@
   flex: 0 0 auto;
 }
 
+.peerInfo {
+  flex-flow: column nowrap;
+  margin-top: var(--default-padding);
+}
+
 .name {
   display: block;
-  margin-top: var(--default-padding);
   letter-spacing: -0.4px;
   font-size: var(--activity-profile-title-font-size);
   line-height: 30px;

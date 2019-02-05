@@ -64,6 +64,7 @@ export class ActivityGroupProfile extends PureComponent<ActivityGroupProfileProp
     return (
       <PeerInfoTitle
         title={name}
+        className={styles.peerInfo}
         userName={shortname}
         titleClassName={styles.name}
         userNameClassName={styles.nick}

@@ -62,7 +62,11 @@ class ActivityMediaDocument extends PureComponent<Props> {
 
     return (
       <div className={styles.sender}>
-        <PeerInfoTitle title={sender} emojiSize={13} />
+        <PeerInfoTitle
+          title={sender}
+          emojiSize={13}
+          className={styles.peerInfo}
+        />
       </div>
     );
   }
