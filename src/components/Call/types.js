@@ -25,7 +25,6 @@ export type CallProps = {
   className?: string,
   call: Call,
   avatarSize: number,
-  showCallDirectionLabel?: boolean,
   onEnd: () => mixed,
   onAnswer: () => mixed,
   onResize: (size: Size) => mixed,

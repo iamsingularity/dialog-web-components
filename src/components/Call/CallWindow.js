@@ -3,7 +3,7 @@
  * @flow
  */
 
-import type { CallProps as Props } from './types';
+import type { CallProps } from './types';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { Text } from '@dlghq/react-l10n';
@@ -18,6 +18,13 @@ import isOnCall from './utils/isOnCall';
 import { hasTheirVideos } from './utils/hasVideo';
 import styles from './Call.css';
 
+type CallWindowProps = {
+  showCallDirectionLabel: boolean,
+  coverVideo: boolean,
+};
+
+type Props = CallProps & CallWindowProps;
+
 type State = {
   hover: boolean,
 };
@@ -26,6 +33,7 @@ class CallWindow extends PureComponent<Props, State> {
   static defaultProps = {
     avatarSize: 136,
     showCallDirectionLabel: false,
+    coverVideo: false,
   };
 
   constructor(props: Props) {
@@ -79,13 +87,13 @@ class CallWindow extends PureComponent<Props, State> {
   }
 
   renderVideo() {
-    const { call } = this.props;
+    const { call, coverVideo } = this.props;
 
     if (!hasTheirVideos(call)) {
       return null;
     }
 
-    return <CallVideo theirVideos={call.theirVideos} />;
+    return <CallVideo theirVideos={call.theirVideos} cover={coverVideo} />;
   }
 
   renderCallDirectionLabel() {
@@ -102,21 +110,33 @@ class CallWindow extends PureComponent<Props, State> {
     return null;
   }
 
-  renderContent() {
-    const { call, avatarSize } = this.props;
+  renderAvatarOrVideo() {
+    const { call, avatarSize, coverVideo } = this.props;
 
-    if (!isOnCall(call.state)) {
+    if (hasTheirVideos(call) && coverVideo) {
+      return this.renderVideo();
+    }
+
+    return (
+      <CallAvatar
+        animated
+        size={avatarSize}
+        peer={call.peer}
+        state={call.state}
+        onClick={this.isSIP() ? undefined : this.handleGoToPeer}
+      />
+    );
+  }
+
+  renderContent() {
+    const { call, coverVideo } = this.props;
+
+    if (!isOnCall(call.state) || coverVideo) {
       return (
         <div className={styles.content}>
           <div className={styles.info}>
             {this.renderCallDirectionLabel()}
-            <CallAvatar
-              animated
-              size={avatarSize}
-              peer={call.peer}
-              state={call.state}
-              onClick={this.isSIP() ? undefined : this.handleGoToPeer}
-            />
+            {this.renderAvatarOrVideo()}
             <CallInfo
               className={styles.callState}
               call={call}
