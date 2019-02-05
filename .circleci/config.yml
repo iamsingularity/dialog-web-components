@@ -8,7 +8,7 @@ defaults_run: &defaults_run
     echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" > ~/.npmrc
     git config user.name "$GIT_NAME"
     git config user.email "$GIT_EMAIL"
-    npm i --no-package-lock
+    npm ci
 
 git_config: &git_config
   name: configure git bot
@@ -37,7 +37,6 @@ jobs:
       - run:
           <<: *defaults_run
       - run: |
-          npm i
           npm run build
           npm test
       - save_cache:
