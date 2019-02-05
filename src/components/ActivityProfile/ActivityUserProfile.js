@@ -11,13 +11,14 @@ import Avatar from '../Avatar/Avatar';
 import Markdown from '../Markdown/Markdown';
 import { PeerInfoTitle } from '../PeerInfoTitle/PeerInfoTitle';
 import CustomProfile from '../CustomProfile/CustomProfile';
+import Spinner from '../Spinner/Spinner';
 import { UserOnline, type UserOnlineState } from '../UserOnline/UserOnline';
 import { ActivityUserProfileContacts } from './ActivityUserProfileContacts/ActivityUserProfileContacts';
 import styles from './ActivityProfile.css';
 
 export type ActivityUserProfileProps = {
   info: User,
-  online: UserOnlineState,
+  online?: UserOnlineState,
   className?: string,
   schema?: ?string,
   children: Node,
@@ -56,11 +57,18 @@ export function ActivityUserProfile(props: ActivityUserProfileProps) {
         <PeerInfoTitle
           title={name}
           userName={nick}
+          className={styles.peerInfo}
           titleClassName={styles.name}
           userNameClassName={styles.nick}
           emojiSize={24}
         />
-        <UserOnline className={styles.online} online={online} />
+        {!online ? (
+          <div className={styles.onlinePending}>
+            <Spinner type="round" />
+          </div>
+        ) : (
+          <UserOnline className={styles.online} online={online} />
+        )}
         {children ? <div className={styles.actions}>{children}</div> : null}
       </div>
       {about ? (

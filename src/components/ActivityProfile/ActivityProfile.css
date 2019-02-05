@@ -74,6 +74,14 @@
   color: var(--activity-profile-text-color-light);
 }
 
+.onlinePending {
+  display: flex;
+  height: 20px;
+  margin-top: var(--default-padding-small);
+  align-items: center;
+  justify-content: center;
+}
+
 .actions {
   margin-top: var(--default-padding-large);
 }
