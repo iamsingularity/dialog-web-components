@@ -80,6 +80,10 @@
   height: 18px;
   color: var(--toolbar-status-color);
   @mixin text-overflow-ellipsis;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-start;
 }
 
 .avatar {
@@ -101,6 +105,10 @@
 
 @media screen and (--small) {
   .nameWrapper {
+    display: block;
+  }
+
+  .status {
     display: block;
   }
 }
