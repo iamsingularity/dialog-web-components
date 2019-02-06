@@ -7,7 +7,7 @@ import type { Space } from '../SpaceInfoModal/types';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import Avatar from '../Avatar/Avatar';
-import PeerInfoTitle from '../PeerInfoTitle/PeerInfoTitle';
+import { PeerInfoTitle } from '../PeerInfoTitle/PeerInfoTitle';
 import styles from './ActivityProfile.css';
 import Text from '@dlghq/react-l10n/src/Text';
 import Markdown from '../Markdown/Markdown';

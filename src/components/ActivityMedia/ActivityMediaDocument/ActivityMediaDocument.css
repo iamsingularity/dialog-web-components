@@ -96,3 +96,7 @@
   color: var(--color-primary);
   margin-right: 4px;
 }
+
+.peerInfo {
+  display: inline-block;
+}

@@ -1,18 +1,30 @@
 ```jsx
 initialState = {
-  online: null,
+  online: {
+    online: true,
+    updateDate: new Date(),
+  },
 };
 
-const handleSetOnline = () =>
+const handleSetOnline = () => {
   setState({
     online: {
       online: true,
       updateDate: new Date(),
-      lastSeen: null,
     },
   });
-const handleSetOffline = () => setState({ online: null });
-const updateLastSeen = () =>
+};
+
+const handleSetOffline = () => {
+  setState({
+    online: {
+      online: false,
+      updateDate: new Date(),
+    },
+  });
+};
+
+const updateLastSeen = () => {
   setState({
     online: {
       online: false,
@@ -20,6 +32,7 @@ const updateLastSeen = () =>
       lastSeen: new Date(),
     },
   });
+};
 
 <>
   <div className="styleguide__buttons">
