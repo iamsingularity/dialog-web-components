@@ -96,7 +96,7 @@ class CallChat extends PureComponent<Props, State> {
         <CallInfo
           className={styles.chatCallState}
           call={call}
-          onCall={false}
+          onCall={isOnCall(call.state)}
           withVideo={false}
         />
       </div>

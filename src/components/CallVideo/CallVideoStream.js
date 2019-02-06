@@ -11,7 +11,7 @@ type Props = {
   className: string,
   stream: MediaSource,
   isMirrored: boolean,
-  cover: boolean,
+  cover?: boolean,
 };
 
 class CallVideoStream extends PureComponent<Props> {
