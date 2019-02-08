@@ -24,6 +24,7 @@ export type CallWrapperProps = {
 export type CallProps = {
   className?: string,
   call: Call,
+  avatarSize: number,
   onEnd: () => mixed,
   onAnswer: () => mixed,
   onResize: (size: Size) => mixed,

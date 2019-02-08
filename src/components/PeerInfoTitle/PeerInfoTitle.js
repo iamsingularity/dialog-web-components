@@ -12,6 +12,7 @@ import styles from './PeerInfoTitle.css';
 
 type Props = {
   title: string,
+  inline: boolean,
   userName?: ?string,
   className?: string,
   titleClassName?: string,
@@ -37,7 +38,7 @@ export function PeerInfoTitle(props: Props) {
         title={title}
       >
         <Markdown
-          inline
+          inline={props.inline}
           emojiSize={props.emojiSize}
           decorators={decorators}
           text={title}
@@ -71,4 +72,5 @@ export function PeerInfoTitle(props: Props) {
 
 PeerInfoTitle.defaultProps = {
   addSpacebars: false,
+  inline: true,
 };

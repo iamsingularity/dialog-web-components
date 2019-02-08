@@ -26,6 +26,10 @@ type State = {
 class CallChat extends PureComponent<Props, State> {
   container: ?Node;
 
+  static defaultProps = {
+    avatarSize: 180,
+  };
+
   constructor(props: Props) {
     super(props);
 
@@ -75,7 +79,7 @@ class CallChat extends PureComponent<Props, State> {
   }
 
   renderInfo() {
-    const { call } = this.props;
+    const { call, avatarSize } = this.props;
 
     if (isOnCall(call.state) && hasTheirVideos(call)) {
       return null;
@@ -85,14 +89,14 @@ class CallChat extends PureComponent<Props, State> {
       <div className={styles.info}>
         <CallAvatar
           animated={!isOnCall(call.state)}
-          size={180}
+          size={avatarSize}
           peer={call.peer}
           state={call.state}
         />
         <CallInfo
           className={styles.chatCallState}
           call={call}
-          onCall={false}
+          onCall={isOnCall(call.state)}
           withVideo={false}
         />
       </div>

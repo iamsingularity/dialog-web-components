@@ -73,6 +73,12 @@
   z-index: calc(var(--z-index-call) + 1);
 }
 
+.callDirectionLabel {
+  position: absolute;
+  top: 0;
+  padding-top: var(--default-padding);
+}
+
 .callState {
   box-sizing: border-box;
   padding: calc(var(--default-padding-large) * 2.5) var(--default-padding) 0;
