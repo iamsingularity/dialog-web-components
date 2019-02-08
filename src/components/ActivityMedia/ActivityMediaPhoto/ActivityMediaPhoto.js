@@ -6,7 +6,7 @@
 import React, { PureComponent } from 'react';
 import type { ProviderContext } from '@dlghq/react-l10n';
 import { Text, LocalizationContextType } from '@dlghq/react-l10n';
-import PeerInfoTitle from '../../PeerInfoTitle/PeerInfoTitle';
+import { PeerInfoTitle } from '../../PeerInfoTitle/PeerInfoTitle';
 import formatDate from 'date-fns/format';
 import getLocalDateTimeFormat from '../../../utils/getLocalDateTimeFormat';
 import getDateFnsLocale from '../../../utils/getDateFnsLocale';
@@ -64,7 +64,13 @@ class ActivityMediaPhoto extends PureComponent<Props> {
       return null;
     }
 
-    return <PeerInfoTitle title={sender} emojiSize={13} />;
+    return (
+      <PeerInfoTitle
+        title={sender}
+        emojiSize={13}
+        className={styles.peerInfo}
+      />
+    );
   }
 
   render() {

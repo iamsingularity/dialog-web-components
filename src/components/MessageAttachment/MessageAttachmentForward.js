@@ -9,7 +9,7 @@ import { Text } from '@dlghq/react-l10n';
 import classNames from 'classnames';
 
 import MessageAttachmentItem from './MessageAttachmentItem';
-import PeerInfoTitle from '../PeerInfoTitle/PeerInfoTitle';
+import { PeerInfoTitle } from '../PeerInfoTitle/PeerInfoTitle';
 import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
 import styles from './MessageAttachment.css';

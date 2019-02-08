@@ -12,7 +12,7 @@ import Avatar from '../Avatar/Avatar';
 import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
 import Markdown from '../Markdown/Markdown';
-import PeerInfoTitle from '../PeerInfoTitle/PeerInfoTitle';
+import { PeerInfoTitle } from '../PeerInfoTitle/PeerInfoTitle';
 import getAvatarPlaceholder from '../../utils/getAvatarPlaceholder';
 import styles from './DiscoverCard.css';
 

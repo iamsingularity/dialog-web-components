@@ -6,7 +6,7 @@
 import type { Call } from '@dlghq/dialog-types';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import PeerInfoTitle from '../PeerInfoTitle/PeerInfoTitle';
+import { PeerInfoTitle } from '../PeerInfoTitle/PeerInfoTitle';
 import CallInfoState from './CallInfoState';
 import styles from './CallInfo.css';
 

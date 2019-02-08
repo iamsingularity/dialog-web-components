@@ -5,7 +5,7 @@
 
 import type { GroupMember } from '@dlghq/dialog-types';
 import React, { PureComponent } from 'react';
-import PeerInfoTitle from '../PeerInfoTitle/PeerInfoTitle';
+import { PeerInfoTitle } from '../PeerInfoTitle/PeerInfoTitle';
 import Avatar from '../Avatar/Avatar';
 import styles from './AdminModal.css';
 import getAvatarPlaceholder from '../../utils/getAvatarPlaceholder';
