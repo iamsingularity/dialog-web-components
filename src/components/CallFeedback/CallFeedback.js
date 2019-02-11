@@ -79,7 +79,7 @@ class CallFeedback extends PureComponent<Props, State> {
 
   render() {
     const className = classNames(styles.container, this.props.className);
-    const { text, rating } = this.state;
+    const { rating } = this.state;
 
     return (
       <HotKeys onHotKey={this.handleHotkey}>
@@ -121,7 +121,7 @@ class CallFeedback extends PureComponent<Props, State> {
             <ModalFooter className={styles.footer}>
               <Button
                 wide
-                disabled={text !== '' && rating !== 0}
+                disabled={rating === 0}
                 type="submit"
                 theme="success"
                 rounded={false}
