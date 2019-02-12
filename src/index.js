@@ -54,6 +54,7 @@ export {
 } from './components/CustomProfile/CustomProfile';
 export { default as UserStatus } from './components/UserStatus/UserStatus';
 export * from './components/UserOnline/UserOnline';
+export * from './components/GroupOnline/GroupOnline';
 export {
   default as SidebarMenuProfile,
 } from './components/SidebarMenuProfile/SidebarMenuProfile';
