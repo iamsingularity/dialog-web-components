@@ -5,11 +5,10 @@
 
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-
-import type { Space } from '../types';
-import createSequence from '../../../utils/createSequence';
-import getAvatarText from '../../Avatar/utils/getAvatarText';
-import getAvatarColor from '../../Avatar/utils/getAvatarColor';
+import type { Space } from '../SpaceList/types';
+import createSequence from '../../utils/createSequence';
+import getAvatarText from '../Avatar/utils/getAvatarText';
+import getAvatarColor from '../Avatar/utils/getAvatarColor';
 import styles from './SpaceAvatar.css';
 
 export type Props = {
@@ -45,7 +44,7 @@ class SpaceAvatar extends PureComponent<Props> {
     this.props.onPick(this.props.space);
   };
 
-  svgShape() {
+  getShape() {
     const { active } = this.props;
 
     if (active) {
@@ -171,7 +170,7 @@ class SpaceAvatar extends PureComponent<Props> {
               fill={`url(#${this.svgId})`}
               x="50%"
               y="50%"
-              d={this.svgShape()}
+              d={this.getShape()}
             />
             {this.renderText()}
           </g>

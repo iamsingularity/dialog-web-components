@@ -12,7 +12,7 @@ import Trigger from '../Trigger/Trigger';
 import Dropdown from '../Dropdown/Dropdown';
 import DropdownItem from '../Dropdown/DropdownItem';
 import Icon from '../Icon/Icon';
-import SpaceAvatar from './SpaceAvatar/SpaceAvatar.js';
+import SpaceAvatar from '../SpaceAvatar/SpaceAvatar.js';
 import styles from './SpaceList.css';
 
 type variants = {
@@ -28,9 +28,9 @@ export type Props = {
   items: Array<Space>,
   selected: Space,
   unreaded: Array<string>,
-  onPick: (current: Space) => mixed,
   spaceActions: Array<variants>,
   icon?: string,
+  onPick: (current: Space) => mixed,
 };
 
 class SpaceList extends PureComponent<Props> {

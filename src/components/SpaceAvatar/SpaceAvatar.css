@@ -2,13 +2,14 @@
  * Copyright 2019 dialog LLC <info@dlg.im>
  */
 
-@import '../../../styles/variables.css';
-@import '../../../styles/colors.css';
+@import '../../styles/variables.css';
+@import '../../styles/colors.css';
 
 :root {
   --space-avatar-text-color: #fff;
   --space-avatar-font-size: 20px;
   --space-avatar-font-size-active: 30px;
+  --avatar-unreaded-size: 8px;
   --avatar-unreaded-color: var(--color-danger);
 }
 
@@ -43,7 +44,6 @@
 .text {
   font-family: var(--default-font-family);
   color: var(--space-avatar-text-color);
-  letter-spacing: 2px;
   fill: currentColor;
   text-transform: uppercase;
   user-select: none;
@@ -61,12 +61,12 @@
 }
 
 .unreaded {
-  width: 5px;
-  height: 5px;
+  width: var(--avatar-unreaded-size);
+  height: var(--avatar-unreaded-size);
   border-radius: 50%;
   border: 1px solid #ffffff;
   position: absolute;
-  top: 66%;
-  right: 14%;
+  bottom: 10%;
+  right: 10%;
   background-color: var(--avatar-unreaded-color);
 }
