@@ -101,6 +101,7 @@
 .title {
   font-size: 16px;
   font-weight: 500;
+  flex: 0 1 auto;
   @mixin text-overflow-ellipsis;
 }
 
