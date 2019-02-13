@@ -12,6 +12,7 @@ import styles from './CallControls.css';
 export type Props = {
   state: CallState,
   size: 'normal' | 'large',
+  iconSize: 'small' | 'normal' | 'large' | number,
   isVisible: boolean,
   isMuted?: boolean,
   onCall: boolean,
@@ -31,6 +32,7 @@ class CallControls extends PureComponent<Props> {
   static defaultProps = {
     disabled: false,
     disabledButtonIds: [],
+    iconSize: 'normal',
   };
 
   isDisabledButton(id: string): boolean {
@@ -38,7 +40,7 @@ class CallControls extends PureComponent<Props> {
   }
 
   render() {
-    const { state, size, isVisible, onCall, withVideo } = this.props;
+    const { state, size, iconSize, isVisible, onCall, withVideo } = this.props;
     const className = classNames(styles.container, {
       [styles.hide]: !isVisible,
       [styles.onCall]: onCall,
@@ -57,7 +59,7 @@ class CallControls extends PureComponent<Props> {
           flat
           key="answer"
           id="call_controls_answer_button"
-          size="normal"
+          size={iconSize}
           theme="success"
           glyph="call"
           className={buttonClassName}
@@ -72,7 +74,7 @@ class CallControls extends PureComponent<Props> {
         flat
         key="end"
         id="call_controls_end_button"
-        size="normal"
+        size={iconSize}
         theme="danger"
         glyph="call_end"
         className={buttonClassName}
@@ -87,7 +89,7 @@ class CallControls extends PureComponent<Props> {
           flat
           key="mic"
           id="call_controls_mic_button"
-          size="normal"
+          size={iconSize}
           theme="primary"
           glyph={this.props.isMuted ? 'mic_material_off' : 'mic_material'}
           className={buttonClassName}
@@ -103,7 +105,7 @@ class CallControls extends PureComponent<Props> {
           flat
           key="camera"
           id="call_controls_camera_button"
-          size="normal"
+          size={iconSize}
           theme="info"
           glyph={this.props.isCameraOn ? 'videocam_off' : 'videocam'}
           className={buttonClassName}
@@ -119,7 +121,7 @@ class CallControls extends PureComponent<Props> {
           flat
           key="screen_share"
           id="call_controls_screen_share_button"
-          size="normal"
+          size={iconSize}
           theme="info"
           glyph={
             this.props.isScreenSharingOn ? 'screen_share_stop' : 'screen_share'

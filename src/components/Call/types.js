@@ -17,6 +17,7 @@ export type CallWrapperProps = {
   onResize: (size: Size) => mixed,
   onGoToPeer: (peer: Peer) => mixed,
   onMuteToggle: (id: string, isMuted: boolean) => mixed,
+  onChatToggle: (value: boolean) => void,
   onCameraToggle: (id: string, isCameraOn: boolean) => mixed,
   onScreenShareToggle: (id: string, isScreenSharingOn: boolean) => mixed,
 };
@@ -30,6 +31,7 @@ export type CallProps = {
   onResize: (size: Size) => mixed,
   onGoToPeer: (peer: Peer) => mixed,
   onMuteToggle: () => mixed,
+  onChatToggle: (value: boolean) => void,
   onCameraToggle?: ?() => mixed,
   onScreenShareToggle?: ?() => mixed,
 };
