@@ -15,6 +15,8 @@ export type Props = {
   isVisible: boolean,
   isMuted?: boolean,
   onCall: boolean,
+  disabled: boolean,
+  disabledButtonIds: Array<string>,
   withVideo: boolean,
   isCameraOn?: boolean,
   isScreenSharingOn?: boolean,
@@ -26,6 +28,15 @@ export type Props = {
 };
 
 class CallControls extends PureComponent<Props> {
+  static defaultProps = {
+    disabled: false,
+    disabledButtonIds: [],
+  };
+
+  isDisabledButton(id: string): boolean {
+    return this.props.disabled || this.props.disabledButtonIds.includes(id);
+  }
+
   render() {
     const { state, size, isVisible, onCall, withVideo } = this.props;
     const className = classNames(styles.container, {
@@ -50,6 +61,7 @@ class CallControls extends PureComponent<Props> {
           theme="success"
           glyph="call"
           className={buttonClassName}
+          disabled={this.isDisabledButton('call_controls_answer_button')}
           onClick={this.props.onAnswer}
         />,
       );
@@ -64,6 +76,7 @@ class CallControls extends PureComponent<Props> {
         theme="danger"
         glyph="call_end"
         className={buttonClassName}
+        disabled={this.isDisabledButton('call_controls_end_button')}
         onClick={this.props.onEnd}
       />,
     );
@@ -78,6 +91,7 @@ class CallControls extends PureComponent<Props> {
           theme="primary"
           glyph={this.props.isMuted ? 'mic_material_off' : 'mic_material'}
           className={buttonClassName}
+          disabled={this.isDisabledButton('call_controls_mic_button')}
           onClick={this.props.onMuteToggle}
         />,
       );
@@ -93,6 +107,7 @@ class CallControls extends PureComponent<Props> {
           theme="info"
           glyph={this.props.isCameraOn ? 'videocam_off' : 'videocam'}
           className={buttonClassName}
+          disabled={this.isDisabledButton('call_controls_camera_button')}
           onClick={this.props.onCameraToggle}
         />,
       );
@@ -110,6 +125,7 @@ class CallControls extends PureComponent<Props> {
             this.props.isScreenSharingOn ? 'screen_share_stop' : 'screen_share'
           }
           className={buttonClassName}
+          disabled={this.isDisabledButton('call_controls_screen_share_button')}
           onClick={this.props.onScreenShareToggle}
         />,
       );
