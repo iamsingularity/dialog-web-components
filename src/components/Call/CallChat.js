@@ -112,6 +112,7 @@ class CallChat extends PureComponent<Props, State> {
         withVideo={hasVideos(call)}
         size="large"
         isVisible={this.state.isControlsVisible}
+        disabled={this.props.isControlsDisabled}
         state={call.state}
         isMuted={call.isMuted}
         isCameraOn={call.isCameraOn}
