@@ -57,6 +57,7 @@ class CallWindow extends PureComponent<Props, State> {
   handleGoToPeer = () => {
     if (!this.isSIP()) {
       this.props.onGoToPeer(this.props.call.peer.peer);
+      this.props.onChatToggle(false);
     }
   };
 

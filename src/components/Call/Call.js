@@ -61,6 +61,7 @@ class Call extends PureComponent<Props> {
         onResize={this.props.onResize}
         onGoToPeer={this.props.onGoToPeer}
         onMuteToggle={this.handleMuteToggle}
+        onChatToggle={this.props.onChatToggle}
         onCameraToggle={isVideoEnabled ? this.handleCameraToggle : null}
         onScreenShareToggle={
           isScreenSharingEnabled ? this.handleScreenShareToggle : null
