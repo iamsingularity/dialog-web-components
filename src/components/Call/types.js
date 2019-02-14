@@ -26,6 +26,7 @@ export type CallProps = {
   className?: string,
   call: Call,
   avatarSize: number,
+  isControlsDisabled?: boolean,
   onEnd: () => mixed,
   onAnswer: () => mixed,
   onResize: (size: Size) => mixed,

@@ -166,6 +166,7 @@ class CallWindow extends PureComponent<Props, State> {
         withVideo={hasTheirVideos(call)}
         size="normal"
         isVisible={this.state.hover}
+        disabled={this.props.isControlsDisabled}
         state={call.state}
         isMuted={call.isMuted}
         isCameraOn={call.isCameraOn}
