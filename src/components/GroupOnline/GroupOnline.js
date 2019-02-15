@@ -7,12 +7,12 @@ import React from 'react';
 import { Text } from '@dlghq/react-l10n';
 
 export type GroupOnlineProps = {
-  online?: number,
+  online: number,
   members: number,
 };
 
 export function GroupOnline(props: GroupOnlineProps) {
-  if (props.online && props.online > 0) {
+  if (props.online > 0) {
     return (
       <Text
         id="GroupOnline.online"
@@ -31,3 +31,8 @@ export function GroupOnline(props: GroupOnlineProps) {
     />
   );
 }
+
+GroupOnline.defaultProps = {
+  online: 0,
+  members: 0,
+};
