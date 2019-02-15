@@ -3,7 +3,7 @@
  * @flow
  */
 
-import type { Call, Peer } from '@dlghq/dialog-types';
+import type { Call, Peer, PeerInfo } from '@dlghq/dialog-types';
 import type { Size } from './utils/getWindowSize';
 
 export type CallWrapperProps = {
@@ -12,6 +12,7 @@ export type CallWrapperProps = {
   small: boolean,
   isVideoEnabled: boolean,
   isScreenSharingEnabled: boolean,
+  selfPeerInfo?: PeerInfo,
   onEnd: (id: string) => mixed,
   onAnswer: (id: string) => mixed,
   onResize: (size: Size) => mixed,
