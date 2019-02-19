@@ -53,7 +53,7 @@ class CallControls extends PureComponent<Props> {
 
     const buttons = [];
 
-    if (state === 'ringing_incoming') {
+    if (state === 'ringing_incoming' || state === 'holded') {
       buttons.push(
         <IconButton
           flat
