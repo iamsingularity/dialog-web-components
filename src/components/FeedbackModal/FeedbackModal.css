@@ -8,6 +8,7 @@
   --feedback-modal-font-family: var(--default-font-family);
   --feedback-modal-width: 450px;
   --feedback-modal-textarea-height: 140px;
+  --feedback-modal-save-logs_font-size: 15px;
 }
 
 /* Styles */
@@ -25,4 +26,23 @@
 
 .footer {
   padding: 0;
+}
+
+.logs_wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.or_save_logs {
+  font-size: var(--feedback-modal-save-logs_font-size);
+  padding-left: 0.5em;
+}
+
+.save_logs {
+  font-size: var(--feedback-modal-save-logs_font-size);
+  text-decoration: underline;
+  cursor: pointer;
+  padding-left: 0.5em;
 }
