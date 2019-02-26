@@ -14,7 +14,7 @@ const handleSubmit = (feedback) => {
   <Button theme="primary" onClick={handleOpen}>
     Open feedback
   </Button>
-  {!state.isOpen ? (
+  {state.isOpen ? (
     <FeedbackModal
       onClose={handleClose}
       onSubmit={handleSubmit}
