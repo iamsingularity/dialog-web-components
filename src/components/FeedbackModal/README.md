@@ -9,6 +9,9 @@ const handleSubmit = (feedback) => {
   console.debug(feedback);
   handleClose();
 };
+const handleSaveLogs = () => {
+  console.debug('handleSaveLogs');
+};
 
 <div>
   <Button theme="primary" onClick={handleOpen}>
@@ -18,7 +21,7 @@ const handleSubmit = (feedback) => {
     <FeedbackModal
       onClose={handleClose}
       onSubmit={handleSubmit}
-      onSaveLogs={handleSubmit}
+      onSaveLogs={handleSaveLogs}
     />
   ) : null}
 </div>;

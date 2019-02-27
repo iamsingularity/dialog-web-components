@@ -27,7 +27,7 @@ type Props = {
   className?: string,
   onSubmit: (feedback: Feedback) => mixed,
   onClose: () => mixed,
-  onSaveLogs?: () => void,
+  onSaveLogs?: () => mixed,
 };
 
 type State = Feedback;
@@ -76,10 +76,16 @@ class FeedbackModal extends PureComponent<Props, State> {
     }
 
     return (
-      <div>
-        <Text className={styles.or_save_logs} id="FeedbackModal.or_save_logs" />
-        <Text className={styles.save_logs} id="FeedbackModal.save_logs" />
-      </div>
+      <span className={styles.saveLogs}>
+        <Text id="FeedbackModal.or" />
+        {'\u00A0'}
+        <Text
+          tagName="div"
+          onClick={this.props.onSaveLogs}
+          className={styles.saveLogsLink}
+          id="FeedbackModal.save_logs"
+        />
+      </span>
     );
   };
 
