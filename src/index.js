@@ -1,6 +1,6 @@
 /*
  * Copyright 2019 dialog LLC <info@dlg.im>
- * @flow
+ * @flow strict
  */
 
 // Interface
@@ -12,9 +12,7 @@ export { default as PeerAvatar } from './components/PeerAvatar/PeerAvatar';
 export {
   default as PeerAvatarDouble,
 } from './components/PeerAvatarDouble/PeerAvatarDouble';
-export {
-  default as PeerInfoTitle,
-} from './components/PeerInfoTitle/PeerInfoTitle';
+export * from './components/PeerInfoTitle/PeerInfoTitle';
 export { default as Scroller } from './components/Scroller/Scroller';
 export { default as Dropdown } from './components/Dropdown/Dropdown';
 export {
@@ -55,6 +53,7 @@ export {
   default as CustomProfile,
 } from './components/CustomProfile/CustomProfile';
 export { default as UserStatus } from './components/UserStatus/UserStatus';
+export * from './components/UserOnline/UserOnline';
 export {
   default as SidebarMenuProfile,
 } from './components/SidebarMenuProfile/SidebarMenuProfile';
@@ -73,7 +72,7 @@ export {
 export { default as Toolbar } from './components/Toolbar/Toolbar';
 export { default as ToolbarAvatar } from './components/Toolbar/ToolbarAvatar';
 export { default as ToolbarButtons } from './components/Toolbar/ToolbarButtons';
-export { default as ToolbarInfo } from './components/Toolbar/ToolbarInfo';
+export * from './components/Toolbar/ToolbarInfo';
 export {
   default as ToolbarInfoButton,
 } from './components/ToolbarInfoButton/ToolbarInfoButton';
@@ -160,14 +159,18 @@ export {
   default as FeedbackModal,
 } from './components/FeedbackModal/FeedbackModal';
 export { default as AdminModal } from './components/AdminModal/AdminModal';
-export { default as EditSpaceModal } from './components/EditSpaceModal/EditSpaceModal';
+export {
+  default as EditSpaceModal,
+} from './components/EditSpaceModal/EditSpaceModal';
 export {
   default as CreateSpaceModal,
 } from './components/CreateSpaceModal/CreateSpaceModal';
 export {
   default as SelectCertificateModal,
 } from './components/SelectCertificateModal/SelectCertificateModal';
-export { default as SpaceInfoModal } from './components/SpaceInfoModal/SpaceInfoModal';
+export {
+  default as SpaceInfoModal,
+} from './components/SpaceInfoModal/SpaceInfoModal';
 
 // Sidebar
 export {
@@ -272,9 +275,6 @@ export {
   default as ActivityListSwitcher,
 } from './components/ActivityList/ActivityListSwitcher';
 export {
-  default as ActivityProfile,
-} from './components/ActivityProfile/ActivityProfile';
-export {
   default as ActivityInvite,
 } from './components/ActivityInvite/ActivityInvite';
 export {
@@ -289,6 +289,7 @@ export {
 export {
   default as ActivityPinned,
 } from './components/ActivityPinned/ActivityPinned';
+export * from './components/ActivityProfile/ActivityProfile';
 
 // Helpers
 export { default as Trigger } from './components/Trigger/Trigger';

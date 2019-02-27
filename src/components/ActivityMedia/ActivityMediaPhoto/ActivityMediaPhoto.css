@@ -59,6 +59,10 @@
   @mixin flex-fix;
 }
 
+.peerInfo {
+  display: inline-block;
+}
+
 .title {
   display: inline-block;
   font-weight: 500;

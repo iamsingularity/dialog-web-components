@@ -6,7 +6,7 @@
 import type { Call } from '@dlghq/dialog-types';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import PeerInfoTitle from '../PeerInfoTitle/PeerInfoTitle';
+import { PeerInfoTitle } from '../PeerInfoTitle/PeerInfoTitle';
 import CallInfoState from './CallInfoState';
 import styles from './CallInfo.css';
 
@@ -15,23 +15,39 @@ type Props = {
   call: Call,
   onCall: boolean,
   withVideo: boolean,
+  titleStyle: 'row' | 'column',
   onClick?: ?() => mixed,
 };
 
 class CallInfo extends PureComponent<Props> {
+  static defaultProps = {
+    titleStyle: 'row',
+  };
+
   render() {
-    const { call } = this.props;
+    const { call, titleStyle } = this.props;
     const className = classNames(styles.container, this.props.className, {
       [styles.onCall]: this.props.onCall,
       [styles.withVideo]: this.props.withVideo,
     });
 
+    let title = call.peer.title;
+    let inline = true;
+    let callerStyle = styles.caller;
+
+    if (titleStyle === 'column') {
+      title = title.replace(/\s+/g, '\n');
+      inline = false;
+      callerStyle = classNames(styles.caller, styles.callerColumn);
+    }
+
     return (
       <div className={className}>
         <div className={styles.wrapper}>
-          <div className={styles.caller}>
+          <div className={callerStyle}>
             <PeerInfoTitle
-              title={call.peer.title}
+              title={title}
+              inline={inline}
               onTitleClick={this.props.onClick}
               emojiSize={this.props.onCall ? 18 : 24}
             />

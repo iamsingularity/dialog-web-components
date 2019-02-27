@@ -13,7 +13,7 @@ import classNames from 'classnames';
 import React, { PureComponent } from 'react';
 import MessageContent from '../MessageContent/MessageContent';
 import PeerAvatar from '../PeerAvatar/PeerAvatar';
-import PeerInfoTitle from '../PeerInfoTitle/PeerInfoTitle';
+import { PeerInfoTitle } from '../PeerInfoTitle/PeerInfoTitle';
 import MessageState from '../MessageState/MessageState';
 import MessageReaction from '../MessageReaction/MessageReaction';
 import Hover from '../Hover/Hover';

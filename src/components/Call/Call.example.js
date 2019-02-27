@@ -229,6 +229,10 @@ class CallExample extends PureComponent<Props, State> {
     console.debug('[call] go to', peer); // eslint-disable-line
   };
 
+  handleChatToggle = () => {
+    console.debug('[call] open chat'); // eslint-disable-line
+  };
+
   renderCall() {
     if (!this.state.call) {
       return null;
@@ -246,6 +250,7 @@ class CallExample extends PureComponent<Props, State> {
         onResize={this.handleResize}
         onGoToPeer={this.handleGoToPeer}
         onMuteToggle={this.handleMuteToggle}
+        onChatToggle={this.handleChatToggle}
         onCameraToggle={this.handleCameraToggle}
         onScreenShareToggle={this.handleScreenShareToggle}
       />
