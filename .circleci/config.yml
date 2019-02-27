@@ -1,17 +1,24 @@
-# CircleCI Config
+#
+# Copyright 2019 dialog LLC <info@dlg.im>
+#
 
 version: 2
 
-defaults_run: &defaults_run
-  name: run defaults
+defaults: &defaults
+  docker:
+    - image: node:10
+
+config_git: &config_git
+  name: Configure git
+  environment:
+    GITHUB_ORIGIN: https://${GITHUB_BOT_TOKEN}@github.com/dialogs/dialog-web-components.git
   command: |
-    echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" > ~/.npmrc
     git config user.name "$GIT_NAME"
     git config user.email "$GIT_EMAIL"
-    npm ci
+    git remote set-url origin ${GITHUB_ORIGIN}
 
-git_config: &git_config
-  name: configure git bot
+config_bot: &config_bot
+  name: Сonfigure bot
   command: |
     if [ -z "$CIRCLE_PR_USERNAME" -a "$CIRCLE_USERNAME" != "dialog-bot" -a -n "$CIRCLE_USERNAME" ]
     then
@@ -28,122 +35,183 @@ git_config: &git_config
       git config user.email "$GITHUB_BOT_EMAIL"
     fi
 
+config_npm: &config_npm
+  name: Configure npm
+  command: echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" > ~/.npmrc
+
+# Jobs
 jobs:
-  build:
-    docker:
-      - image: node:10
+  dependencies:
+    <<: *defaults
     steps:
       - checkout
       - run:
-          <<: *defaults_run
-      - run: |
-          npm run build
-          npm test
+          <<: *config_npm
+      - run:
+          name: Install dependencies
+          command: npm ci
       - save_cache:
           key: dialog-components-{{ .Branch }}
           paths:
             - node_modules
 
-  sonar_scan:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - run:
-          <<: *defaults_run
-      - run: |
-          ./node_modules/.bin/sonar-scanner \
-            -Dsonar.projectKey=dialogs_dialog-web-components \
-            -Dsonar.organization=dialogs \
-            -Dsonar.sources=src/ \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=${SONAR_TOKEN}
-      - save_cache:
-          key: dialog-components-sonar-cube
-          paths:
-            - ~/.sonar
-
-  deployment:
-    docker:
-      - image: node:10
+  test:
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
           keys:
             - dialog-components-{{ .Branch }}
       - run:
-          <<: *defaults_run
-      - run:
-          <<: *git_config
-      - run: |
-          git remote set-url origin https://${GITHUB_BOT_TOKEN}@github.com/dialogs/dialog-web-components.git
-          npm run docs
+          name: Run tests
+          command: npm test
 
-  npm_publish_prerelease:
-    docker:
-      - image: node:10
+  sonar_scan:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - dialog-components-{{ .Branch }}
+      - run:
+          name: Run Sonar
+          command: |
+            ./node_modules/.bin/sonar-scanner \
+              -Dsonar.projectKey=dialogs_dialog-web-components \
+              -Dsonar.organization=dialogs \
+              -Dsonar.sources=src/ \
+              -Dsonar.host.url=https://sonarcloud.io \
+              -Dsonar.login=${SONAR_TOKEN}
+      - save_cache:
+          key: dialog-components-sonar-cube
+          paths:
+            - ~/.sonar
+
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - dialog-components-{{ .Branch }}
+      - run:
+          name: Build package
+          command: npm run build
+      - save_cache:
+          key: dialog-components-{{ .Branch }}
+          paths:
+            - node_modules
+
+  docs:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - dialog-components-{{ .Branch }}
+      - run:
+          <<: *config_git
+      - run:
+          <<: *config_bot
+      - run:
+          name: Build docs
+          command: npm run docs
+
+  prerelease:
+    <<: *defaults
     steps:
       - checkout
       - run:
-          <<: *defaults_run
+          <<: *config_git
       - run:
-          <<: *git_config
-      - run: |
-          [[ $CIRCLE_BRANCH = "develop" ]] && npm_tag="next" || npm_tag=$CIRCLE_BRANCH
-          if [ -z "$CIRCLE_PR_USERNAME" -a "$CIRCLE_USERNAME" != "dialog-bot" -a -n "$CIRCLE_USERNAME" ]
-          then
-            npm version prerelease --preid=${CIRCLE_BRANCH//[\/_]/-}.${CIRCLE_BUILD_NUM} --ignore-scripts
-            npm publish --tag=${npm_tag}
-          fi
+          <<: *config_bot
+      - run:
+          <<: *config_npm
+      - run:
+          name: Publish prerelease
+          command: |
+            if [ -z "$CIRCLE_PR_USERNAME" -a "$CIRCLE_USERNAME" != "dialog-bot" -a -n "$CIRCLE_USERNAME" ]
+            then
+              if [ $CIRCLE_BRANCH = "develop" ]
+              then
+                npm version patch --ignore-scripts
+                npm publish --tag="next"
+                git push -q --follow-tags ${GITHUB_ORIGIN} ${CIRCLE_BRANCH}
+              else
+                npm version prerelease --preid=${CIRCLE_BRANCH//[\/_]/-}.${CIRCLE_BUILD_NUM} --ignore-scripts
+                npm publish --tag=${CIRCLE_BRANCH}
+              fi
+            fi
 
-  npm_publish_release:
-    docker:
-      - image: node:10
+  release:
+    <<: *defaults
     steps:
       - checkout
       - run:
-          <<: *defaults_run
+          <<: *config_git
       - run:
-          <<: *git_config
-      - run: |
-          if [ "$CIRCLE_USERNAME" != "dialog-bot" -a -n "$CIRCLE_USERNAME" ]
-          then
-            npm test
-            npm version minor --ignore-scripts
-            npm run build
-            npm publish
-            git push -q --follow-tags https://${GITHUB_BOT_TOKEN}@github.com/dialogs/dialog-web-components.git ${CIRCLE_BRANCH}
-          fi
+          <<: *config_bot
+      - run:
+          <<: *config_npm
+      - run:
+          name: Publish release
+          command: |
+            if [ "$CIRCLE_USERNAME" != "dialog-bot" -a -n "$CIRCLE_USERNAME" ]
+            then
+              npm version minor --ignore-scripts
+              npm publish
+              git push -q --follow-tags ${GITHUB_ORIGIN} ${CIRCLE_BRANCH}
+            fi
+
 
 workflows:
   version: 2
   build-deploy:
     jobs:
-      - build:
+      - dependencies:
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+      - test:
+          requires:
+            - dependencies
           filters:
             branches:
               ignore:
                 - gh-pages
       - sonar_scan:
+          requires:
+            - dependencies
           filters:
             branches:
               ignore:
-                - gh-pages 
-      - deployment:
+                - gh-pages
+      - build:
           requires:
+            - test
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+      - docs:
+          requires:
+            - test
             - build
           filters:
             branches:
               only:
                 - master
-      - npm_publish_release:
+      - release:
           requires:
+            - test
             - build
           filters:
             branches:
               only: master
-      - npm_publish_prerelease:
+      - prerelease:
           requires:
+            - test
             - build
           filters:
             branches:
