@@ -136,7 +136,7 @@ jobs:
               then
                 npm version patch --ignore-scripts
                 npm publish --tag="next"
-                git push -q --follow-tags ${GITHUB_ORIGIN} ${CIRCLE_BRANCH}
+                git push -q --follow-tags origin ${CIRCLE_BRANCH}
               else
                 npm version prerelease --preid=${CIRCLE_BRANCH//[\/_]/-}.${CIRCLE_BUILD_NUM} --ignore-scripts
                 npm publish --tag=${CIRCLE_BRANCH}
@@ -160,7 +160,7 @@ jobs:
             then
               npm version minor --ignore-scripts
               npm publish
-              git push -q --follow-tags ${GITHUB_ORIGIN} ${CIRCLE_BRANCH}
+              git push -q --follow-tags origin ${CIRCLE_BRANCH}
             fi
 
 
