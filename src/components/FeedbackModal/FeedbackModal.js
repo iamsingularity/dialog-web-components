@@ -118,7 +118,7 @@ class FeedbackModal extends PureComponent<Props, State> {
                 value={this.state.text}
                 onChange={this.handleFeedbackChange}
               />
-              <div className={styles.logs_wrapper}>
+              <div className={styles.logsWrapper}>
                 <Switcher
                   id={this.props.id + '_add_logs'}
                   name="addLogs"
