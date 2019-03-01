@@ -196,7 +196,6 @@ workflows:
                 - gh-pages
       - docs:
           requires:
-            - test
             - build
           filters:
             branches:
@@ -204,14 +203,12 @@ workflows:
                 - master
       - release:
           requires:
-            - test
             - build
           filters:
             branches:
               only: master
       - prerelease:
           requires:
-            - test
             - build
           filters:
             branches:
