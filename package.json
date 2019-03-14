@@ -1,10 +1,14 @@
 {
   "name": "@dlghq/dialog-components",
-  "version": "0.242.0",
+  "version": "0.248.0",
   "description": "dialog Web Components",
   "main": "src/index.js",
+  "module": "src/index.js",
+  "source": true,
   "files": [
-    "src"
+    "src",
+    "babel.config.js",
+    ".babelrc"
   ],
   "keywords": [
     "react",
@@ -61,7 +65,7 @@
     "react-dom": "^16.5.2"
   },
   "dependencies": {
-    "@dlghq/dialog-ui": "0.0.15",
+    "@dlghq/dialog-ui": "0.0.18",
     "@dlghq/dialog-utils": "0.10.0",
     "classnames": "2.2.6",
     "clipboard": "2.0.4",
@@ -93,7 +97,6 @@
     "@dlghq/postcss-dialog": "1.13.1",
     "@dlghq/react-l10n": "0.9.3",
     "@dlghq/stylelint-config-dialog": "0.11.0",
-    "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "24.5.0",
     "babel-loader": "8.0.5",
     "babel-preset-jest": "24.3.0",

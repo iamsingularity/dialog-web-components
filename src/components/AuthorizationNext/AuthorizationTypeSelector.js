@@ -8,11 +8,12 @@ import { Text } from '@dlghq/react-l10n';
 import { Tabs, Tab } from '@dlghq/dialog-ui';
 
 import type { AuthTypes } from './types';
+import styles from './AuthorizationTypeSelector.css';
 
 export type AuthorizationTypeSelectorProps = {
   type: AuthTypes,
   allowed: Array<AuthTypes>,
-  onChange: (type: string) => mixed,
+  onChange: (type: AuthTypes) => mixed,
 };
 
 export function AuthorizationTypeSelector({
@@ -27,7 +28,7 @@ export function AuthorizationTypeSelector({
   return (
     <Tabs current={type} onChange={onChange} intent="primary" vertical={false}>
       {allowed.map((authType) => (
-        <Tab value={authType} key={authType}>
+        <Tab value={authType} key={authType} className={styles.tab}>
           <Text id={`AuthorizationNext.type.${authType}`} />
         </Tab>
       ))}
