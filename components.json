@@ -113,7 +113,8 @@
       "SidebarRecentItem",
       "SidebarCallItem",
       "SidebarFakeItem",
-      "SidebarFooter"
+      "SidebarFooter",
+      "DialogListItem"
     ]
   },
   {

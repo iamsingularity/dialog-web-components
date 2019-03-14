@@ -1,0 +1,173 @@
+/**
+ * Copyright 2018 dialog LLC <info@dlg.im>
+ */
+
+@import '../../styles/variables.css';
+
+:root {
+  --dialog-list-item-font-family: var(--default-font-family);
+  --dialog-list-item-background: tranparent;
+  --dialog-list-item-hover-background: color-mod(#000 alpha(2%));
+  --dialog-list-item-active-background: color-mod(#000 alpha(4%));
+  --dialog-list-item-selected-background: color-mod(
+    var(--color-primary) alpha(15%)
+  );
+
+  --sidebar-dialog-list-item-title-font-size: var(--default-font-size);
+  --sidebar-dialog-list-item-title-color: #000;
+
+  --sidebar-dialog-list-item-icon-color: color-mod(#000 alpha(30%));
+
+  --sidebar-dialog-list-item-message-font-size: 13px;
+  --sidebar-dialog-list-item-message-color: color-mod(#4a4a4a alpha(69%));
+
+  --sidebar-dialog-list-item-counter-size: 20px;
+  --sidebar-dialog-list-item-counter-font-size: 11px;
+  --sidebar-dialog-list-item-counter-background: color-mod(
+    var(--color-primary) alpha(90%)
+  );
+  --sidebar-dialog-list-item-counter-muted-background: color-mod(
+    #000 alpha(25%)
+  );
+  --sidebar-dialog-list-item-counter-color: #fff;
+}
+
+/* Styles */
+.container {
+  all: initial;
+  display: flex;
+  font-family: var(--dialog-list-item-font-family);
+  padding: 8px 12px;
+  user-select: none;
+  cursor: pointer;
+  line-height: 0px;
+
+  &:hover {
+    background-color: var(--dialog-list-item-hover-background);
+  }
+
+  &:active {
+    background-color: var(--dialog-list-item-active-background);
+  }
+}
+
+.selected {
+  cursor: default !important;
+  background-color: var(--dialog-list-item-selected-background);
+
+  &:hover {
+    background-color: var(--dialog-list-item-selected-background);
+  }
+
+  &:active {
+    background-color: color-mod(
+      var(--dialog-list-item-selected-background) alpha(17%)
+    );
+  }
+}
+
+.muted {
+  & .counter {
+    background-color: var(--sidebar-dialog-list-item-counter-muted-background);
+  }
+}
+
+.avatarBlock {
+  flex: 0 0 auto;
+  padding-right: 12px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-flow: column nowrap;
+  @mixin flex-fix;
+}
+
+.side {
+  flex: 0 0 20px;
+  padding-left: 4px;
+  display: flex;
+  justify-content: center;
+  flex-flow: column nowrap;
+}
+
+.statusBlock {
+  flex: 0 0 auto;
+  height: 20px;
+}
+
+.counterBlock {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  @mixin flex-fix;
+}
+
+.titleBlock {
+  flex: 0 0 auto;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-start;
+  @mixin flex-fix;
+}
+
+.title {
+  display: block;
+  flex: 0 1 auto;
+  line-height: 20px;
+  font-size: var(--sidebar-dialog-list-item-title-font-size);
+  color: var(--sidebar-dialog-list-item-title-color);
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  @mixin flex-fix;
+  @mixin text-overflow-ellipsis;
+}
+
+.icon {
+  flex: 0 0 auto;
+  margin-left: 4px;
+  color: var(--sidebar-dialog-list-item-icon-color);
+}
+
+.messageBlock {
+}
+
+.message {
+  font-size: var(--sidebar-dialog-list-item-message-font-size);
+  color: var(--sidebar-dialog-list-item-message-color);
+  line-height: 16px;
+  letter-spacing: -0.3px;
+  cursor: inherit;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical;
+}
+
+.counter {
+  display: block;
+  font-size: var(--sidebar-dialog-list-item-counter-font-size);
+  height: var(--sidebar-dialog-list-item-counter-size);
+  min-width: var(--sidebar-dialog-list-item-counter-size);
+  line-height: var(--sidebar-dialog-list-item-counter-size);
+  border-radius: calc(var(--sidebar-dialog-list-item-counter-size) / 2);
+  background-color: var(--sidebar-dialog-list-item-counter-background);
+  color: var(--sidebar-dialog-list-item-counter-color);
+  padding: 0px 5px;
+  font-weight: 600;
+  box-sizing: border-box;
+  text-align: center;
+  vertical-align: middle;
+  letter-spacing: -0.2px;
+}
