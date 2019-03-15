@@ -8,12 +8,12 @@ import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 
 import getAvatarText from './utils/getAvatarText';
-import getAvatarPlaceholder from './utils/getAvatarPlaceholder';
 import getAvatarColor from './utils/getAvatarColor';
 import createSequence from '../../utils/createSequence';
 import ImagePreloader, {
-  type State as ImagePreloaderState,
+  type ImagePreloaderState,
   STATE_SUCCESS,
+  STATE_ERROR,
 } from '../ImagePreloader/ImagePreloader';
 import Hover from '../Hover/Hover';
 import styles from './Avatar.css';
@@ -80,7 +80,7 @@ class Avatar extends PureComponent<Props, State> {
   }
 
   renderDefs({ state, src }: ImagePreloaderState) {
-    if (state === STATE_SUCCESS || src !== null) {
+    if (state !== STATE_ERROR && (state === STATE_SUCCESS || src !== null)) {
       return (
         <pattern
           id={this.id}
@@ -106,7 +106,10 @@ class Avatar extends PureComponent<Props, State> {
   renderText({ state, src }: ImagePreloaderState) {
     const { title, size } = this.props;
 
-    if (state === STATE_SUCCESS || src !== null || !title) {
+    if (
+      (state !== STATE_ERROR && (state === STATE_SUCCESS || src !== null)) ||
+      !title
+    ) {
       return null;
     }
 

@@ -8,6 +8,7 @@ import classNames from 'classnames';
 
 import getImageSize from '../../utils/getImageSize';
 import ImagePreloader, {
+  type ImagePreloaderState,
   STATE_SUCCESS,
 } from '../ImagePreloader/ImagePreloader';
 import styles from './Image.css';
@@ -49,7 +50,7 @@ class Image extends PureComponent<Props, void> {
         style={{ width, height }}
       >
         <ImagePreloader src={this.props.src}>
-          {({ state, src }) => {
+          {({ state, src }: ImagePreloaderState) => {
             const source = state === STATE_SUCCESS ? src : preview;
 
             if (!source) {
