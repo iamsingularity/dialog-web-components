@@ -3,7 +3,7 @@
  * @flow strict
  */
 
-import React, { type Node } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import type { Peer, MessageContent } from '@dlghq/dialog-types';
 import { Icon } from '@dlghq/dialog-ui';
@@ -39,6 +39,7 @@ export type DialogListItemProps = {
 
 export function DialogListItem(props: DialogListItemProps) {
   const {
+    uid,
     info,
     message,
     selected,
@@ -72,38 +73,37 @@ export function DialogListItem(props: DialogListItemProps) {
           placeholder={getAvatarPlaceholder(info.peer.id)}
         />
       </div>
-      <div className={styles.body}>
-        <div className={styles.titleBlock}>
-          <PeerInfoTitle title={info.title} className={styles.title} />
-          {isPinned ? (
-            <Icon
-              glyph="new_pin"
-              className={styles.icon}
-              width={20}
-              ariaLabel="pinned"
-              title="Pinned"
-            />
-          ) : null}
-          {isMuted ? (
-            <Icon
-              glyph="new_mute"
-              className={styles.icon}
-              width={20}
-              ariaLabel="muted"
-              title="Pinned"
-            />
-          ) : null}
+      <div className={styles.wrapper}>
+        <div className={styles.header}>
+          <div className={styles.titleBlock}>
+            <PeerInfoTitle title={info.title} className={styles.title} />
+            {isPinned ? (
+              <Icon
+                glyph="new_pin"
+                className={styles.icon}
+                width={20}
+                ariaLabel="pinned"
+                title="Pinned"
+              />
+            ) : null}
+            {isMuted ? (
+              <Icon
+                glyph="new_mute"
+                className={styles.icon}
+                width={20}
+                ariaLabel="muted"
+                title="Pinned"
+              />
+            ) : null}
+          </div>
         </div>
-        <div className={styles.messageBlock}>
-          <MessagePreview message={message} className={styles.message} />
-        </div>
-      </div>
-      <div className={styles.side}>
-        <div className={styles.statusBlock} />
-        <div className={styles.counterBlock}>
-          {Boolean(counter) ? (
-            <div className={styles.counter}>{counter}</div>
-          ) : null}
+        <div className={styles.body}>
+          <MessagePreview
+            uid={uid}
+            message={message}
+            className={styles.message}
+          />
+          {counter ? <div className={styles.counter}>{counter}</div> : null}
         </div>
       </div>
     </div>

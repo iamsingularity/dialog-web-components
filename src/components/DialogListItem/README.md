@@ -77,8 +77,8 @@ function randomizeCounter() {
         isMuted={state.muted.has(peer.peer.key)}
         message={{
           type: 'text',
-          sender: messages[1].sender,
-          content: messages[1].content.text,
+          sender: messages[0].sender,
+          content: messages[0].content.text,
         }}
         onSelect={handleSelect}
       />

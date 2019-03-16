@@ -82,37 +82,22 @@
   justify-content: center;
 }
 
-.body {
+.wrapper {
   flex: 1 1 auto;
   display: flex;
   flex-flow: column nowrap;
   @mixin flex-fix;
 }
 
-.side {
-  flex: 0 0 20px;
-  padding-left: 4px;
-  display: flex;
-  justify-content: center;
-  flex-flow: column nowrap;
-}
-
-.statusBlock {
+.header {
   flex: 0 0 auto;
-  height: 20px;
-}
-
-.counterBlock {
-  flex: 1 1 auto;
   display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
+  flex-flow: row nowrap;
   @mixin flex-fix;
 }
 
 .titleBlock {
-  flex: 0 0 auto;
+  flex: 1 1 auto;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -139,10 +124,19 @@
   color: var(--sidebar-dialog-list-item-icon-color);
 }
 
-.messageBlock {
+.body {
+  flex: 1 1 auto;
+  @mixin flex-fix;
+  flex-flow: row nowrap;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 .message {
+  flex: 1 1 auto;
+  @mixin flex-fix;
   font-size: var(--sidebar-dialog-list-item-message-font-size);
   color: var(--sidebar-dialog-list-item-message-color);
   line-height: 16px;
@@ -156,6 +150,7 @@
 }
 
 .counter {
+  flex: 0 0 auto;
   display: block;
   font-size: var(--sidebar-dialog-list-item-counter-font-size);
   height: var(--sidebar-dialog-list-item-counter-size);
