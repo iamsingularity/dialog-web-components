@@ -218,6 +218,7 @@ export {
 export {
   default as SidebarUpdateButton,
 } from './components/SidebarFooter/SidebarUpdateButton';
+export * from './components/DialogList/DialogList';
 export * from './components/DialogListItem/DialogListItem';
 
 // Chat

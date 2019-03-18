@@ -114,6 +114,7 @@
       "SidebarCallItem",
       "SidebarFakeItem",
       "SidebarFooter",
+      "DialogList",
       "DialogListItem"
     ]
   },

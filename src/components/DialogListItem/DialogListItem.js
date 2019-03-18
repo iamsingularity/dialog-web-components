@@ -100,6 +100,7 @@ export function DialogListItem(props: DialogListItemProps) {
         <div className={styles.body}>
           <MessagePreview
             uid={uid}
+            info={info}
             message={message}
             className={styles.message}
           />
