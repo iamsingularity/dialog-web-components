@@ -18,7 +18,7 @@ import ImagePreloader, {
 import Hover from '../Hover/Hover';
 import styles from './Avatar.css';
 
-export type Props = {
+export type AvatarProps = {
   title: string | null,
   image: ?string,
   size: number,
@@ -29,13 +29,13 @@ export type Props = {
   square?: boolean,
 };
 
-export type State = {
+export type AvatarState = {
   isHovered: boolean,
 };
 
 const seq = createSequence();
 
-class Avatar extends PureComponent<Props, State> {
+class Avatar extends PureComponent<AvatarProps, AvatarState> {
   id: string;
 
   static defaultProps = {
@@ -47,7 +47,7 @@ class Avatar extends PureComponent<Props, State> {
     square: false,
   };
 
-  constructor(props: Props) {
+  constructor(props: AvatarProps) {
     super(props);
 
     this.id = 'avatar_' + seq.next();
