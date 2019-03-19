@@ -1,0 +1,18 @@
+you: 'You'
+draft: 'Draft: '
+code: Code
+quote: Quote
+forwarded: Forwarded message
+reply: Reply message
+
+type:
+  photo: Photo
+  voice: Voice
+  video: Video
+  contact: Contact
+  sticker: Sticker
+  deleted: Deleted
+  document: Document
+  location: Location
+  unknown: ''
+  unsupported: ''

@@ -10,6 +10,24 @@
 
 /* Styles */
 .container {
-  all: initial;
   font-family: var(--message-preview-font-family);
+  word-break: break-all;
+}
+
+.sender {
+  color: color-mod(#000 alpha(60%));
+}
+
+.preview {
+  color: color-mod(#4a4a4a alpha(60%));
+  letter-spacing: -0.26px;
+}
+
+.highlight {
+}
+
+.text {
+}
+
+.service {
 }

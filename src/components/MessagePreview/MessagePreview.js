@@ -8,53 +8,99 @@ import classNames from 'classnames';
 import { Text } from '@dlghq/react-l10n';
 
 import type { DialogMessage } from '../DialogListItem';
-import TextMessagePreview from '../SidebarRecentItem/MessagePreview/TextMessagePreview';
+import getInlineText from '../SidebarRecentItem/utils/getInlineText';
+import decorators from '../SidebarRecentItem/utils/decorators';
+import Markdown from '../Markdown/Markdown';
+import { PeerInfoTitle } from '../PeerInfoTitle/PeerInfoTitle';
 import styles from './MessagePreview.css';
 
 export type MessagePreviewProps = {
   className?: string,
   uid: number,
-  // info: DialogPeerInfo,
-  message: ?DialogMessage,
+  withSender: boolean,
+  message: DialogMessage,
 };
 
-export function MessagePreview(props: MessagePreviewProps) {
-  const { message, uid } = props;
-  const classes = classNames(styles.container, props.className);
+export function MessagePreview({
+  message: { sender, content },
+  uid,
+  withSender,
+  className,
+}: MessagePreviewProps) {
+  const classes = classNames(styles.container, className);
 
-  function renderSender() {
-    if (message && message.sender.peer.id === uid) {
-      console.log('Sender is me');
-      // return <div className={styles.sender}>{info.title}</div>;
+  function renderTextMessage() {
+    if (content.type === 'text' || content.type === 'service') {
+      if (content.text.startsWith('```')) {
+        return <Text className={styles.highlight} id="MessagePreview.code" />;
+      }
+
+      if (content.text.startsWith('>')) {
+        return <Text className={styles.highlight} id="MessagePreview.quote" />;
+      }
+
+      return (
+        <Markdown
+          inline
+          className={styles.text}
+          text={getInlineText(content.text)}
+          decorators={decorators}
+        />
+      );
     }
 
     return null;
   }
 
+  function renderPreview() {
+    switch (content.type) {
+      case 'service':
+        return <span className={styles.service}>{content.text}</span>;
+
+      case 'text':
+        return renderTextMessage();
+
+      case 'unsupported':
+        console.warn('[MessagePreview]: unsupported message type');
+
+        return null;
+
+      default:
+        return (
+          <Text
+            className={styles.highlight}
+            id={`MessagePreview.type.${content.type}`}
+          />
+        );
+    }
+  }
+
+  function renderSender() {
+    if (!withSender || !sender) {
+      return null;
+    }
+
+    return (
+      <span className={styles.sender}>
+        {sender.peer.id === uid ? (
+          <Text id="MessagePreview.you" />
+        ) : (
+          <PeerInfoTitle title={sender.title} />
+        )}
+        {': '}
+        <br />
+      </span>
+    );
+  }
+
   return (
     <div className={classes}>
       {renderSender()}
-      {message && (
-        <div className={styles.message}>
-          {message.content.type === 'text' && (
-            <TextMessagePreview
-              content={message.content}
-              className={styles.preview}
-              emojiSize={15}
-            />
-          )}
-          {message.content.type === 'service' && (
-            <span className={styles.service}>{message.content.text}</span>
-          )}
-          {message.content.type !== 'service' &&
-          message.content.type !== 'text' ? (
-            <Text
-              className={styles.highlight}
-              id={`SidebarRecentItem.${message.content.type}`}
-            />
-          ) : null}
-        </div>
-      )}
+      <span className={styles.preview}>{renderPreview()}</span>
     </div>
   );
 }
+
+MessagePreview.defaultProps = {
+  withSender: true,
+};

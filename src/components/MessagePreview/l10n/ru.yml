@@ -1,0 +1,18 @@
+you: 'Вы'
+draft: 'Черновик: '
+code: Код
+quote: Цитата
+forwarded: Пересланное сообщение
+reply: Ответ на сообщение
+
+type:
+  photo: Фото
+  voice: Голос
+  video: Видео
+  sticker: Стикер
+  contact: Контакт
+  deleted: Удалено
+  document: Документ
+  location: Местоположение
+  unknown: ''
+  unsupported: ''
