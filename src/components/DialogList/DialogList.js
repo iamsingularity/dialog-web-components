@@ -55,7 +55,9 @@ export function DialogList({
   }
 
   function renderRow({ index, key, style }) {
-    const { info, isPinned, isMuted, counter, message } = getItem(index);
+    const { info, isPinned, isMuted, counter, selected, message } = getItem(
+      index,
+    );
 
     return (
       <div key={key} style={style}>
@@ -63,7 +65,7 @@ export function DialogList({
           uid={uid}
           info={info}
           counter={counter}
-          selected={false}
+          selected={selected}
           isPinned={isPinned}
           isMuted={isMuted}
           message={message}
