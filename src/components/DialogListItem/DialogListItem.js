@@ -3,7 +3,7 @@
  * @flow strict
  */
 
-import React from 'react';
+import React, { type Node } from 'react';
 import classNames from 'classnames';
 import { L10n } from '@dlghq/react-l10n';
 import { Icon } from '@dlghq/dialog-ui';
@@ -61,6 +61,7 @@ export type DialogListItemProps = {
   isPinned: boolean,
   className?: string,
   onSelect: (peer: Peer) => mixed,
+  renderLink: (id: number, content: Node) => Node,
 };
 
 export function DialogListItem(props: DialogListItemProps) {
@@ -74,6 +75,7 @@ export function DialogListItem(props: DialogListItemProps) {
     isPinned,
     className,
     onSelect,
+    renderLink,
   } = props;
   const classes = classNames(
     styles.container,
@@ -88,7 +90,8 @@ export function DialogListItem(props: DialogListItemProps) {
     onSelect(info.peer);
   }
 
-  return (
+  return renderLink(
+    info.peer.id,
     <L10n>
       {({ l10n: { formatText } }) => (
         <div className={classes} onClick={handleClick}>
@@ -142,6 +145,10 @@ export function DialogListItem(props: DialogListItemProps) {
           </div>
         </div>
       )}
-    </L10n>
+    </L10n>,
   );
 }
+
+DialogListItem.defaultProps = {
+  renderLink: (id, content) => <a href={`/foo/bar/${id}`}>{content}</a>,
+};
