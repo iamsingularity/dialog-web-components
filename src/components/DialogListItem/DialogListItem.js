@@ -135,9 +135,9 @@ export function DialogListItem(props: DialogListItemProps) {
                   />
                 )}
               </div>
-              {counter && counter !== 0 && (
+              {counter && counter !== 0 ? (
                 <div className={styles.counter}>{counter}</div>
-              )}
+              ) : null}
             </div>
           </div>
         </div>
