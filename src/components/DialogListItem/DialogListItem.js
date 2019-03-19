@@ -60,7 +60,7 @@ export type DialogListItemProps = {
   isMuted: boolean,
   isPinned: boolean,
   className?: string,
-  onSelect: (peer: Peer) => mixed,
+  onSelect?: (peer: Peer) => mixed,
 };
 
 export function DialogListItem(props: DialogListItemProps) {
@@ -85,7 +85,7 @@ export function DialogListItem(props: DialogListItemProps) {
   );
 
   function handleClick(): void {
-    onSelect(info.peer);
+    onSelect && onSelect(info.peer);
   }
 
   return (

@@ -3,7 +3,7 @@
  * @flow strict
  */
 
-import React from 'react';
+import React, { type Node } from 'react';
 import classNames from 'classnames';
 import { AutoSizer, List } from 'react-virtualized';
 
@@ -29,8 +29,9 @@ export type DialogListProps = {
   uid: number,
   className?: string,
   dialogs: Array<Dialog>,
-  onSelect: (peer: Peer) => mixed,
-  onRender: (visiblePeers: Array<Peer>) => mixed,
+  onSelect?: (peer: Peer) => mixed,
+  onRender?: (visiblePeers: Array<Peer>) => mixed,
+  renderItem: (dialog: Dialog) => Node,
 };
 
 export function DialogList({
@@ -39,6 +40,7 @@ export function DialogList({
   uid,
   onSelect,
   onRender,
+  renderItem,
 }: DialogListProps) {
   const classes = classNames(styles.container, className);
 
@@ -47,17 +49,35 @@ export function DialogList({
   }
 
   function handleRowsRendered({ startIndex, stopIndex }) {
-    onRender(
-      dialogs
-        .slice(startIndex, stopIndex + 1)
-        .map((dialog) => dialog.info.peer),
-    );
+    onRender &&
+      onRender(
+        dialogs
+          .slice(startIndex, stopIndex + 1)
+          .map((dialog) => dialog.info.peer),
+      );
   }
 
   function renderRow({ index, key, style }) {
     const { info, isPinned, isMuted, counter, selected, message } = getItem(
       index,
     );
+
+    if (renderItem) {
+      return (
+        <div key={key} style={style}>
+          {renderItem({
+            uid,
+            info,
+            message,
+            counter,
+            selected,
+            isMuted,
+            isPinned,
+            onSelect,
+          })}
+        </div>
+      );
+    }
 
     return (
       <div key={key} style={style}>
