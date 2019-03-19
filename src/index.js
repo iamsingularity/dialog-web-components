@@ -218,8 +218,9 @@ export {
 export {
   default as SidebarUpdateButton,
 } from './components/SidebarFooter/SidebarUpdateButton';
-export * from './components/DialogList/DialogList';
-export * from './components/DialogListItem/DialogListItem';
+
+export * from './components/DialogList';
+export * from './components/DialogListItem';
 
 // Chat
 export { default as Message } from './components/Message/Message';
