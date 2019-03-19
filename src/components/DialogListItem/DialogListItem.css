@@ -20,6 +20,8 @@
 
   --sidebar-dialog-list-item-message-font-size: 13px;
   --sidebar-dialog-list-item-message-color: color-mod(#4a4a4a alpha(69%));
+  --sidebar-dialog-list-item-message-line-height: 16px;
+  --sidebar-dialog-list-item-message-lines-count: 2;
 
   --sidebar-dialog-list-item-counter-size: 20px;
   --sidebar-dialog-list-item-counter-font-size: 11px;
@@ -139,12 +141,16 @@
   @mixin flex-fix;
   font-size: var(--sidebar-dialog-list-item-message-font-size);
   color: var(--sidebar-dialog-list-item-message-color);
-  line-height: 16px;
+  line-height: var(--sidebar-dialog-list-item-message-line-height);
   letter-spacing: -0.3px;
   cursor: inherit;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: var(--sidebar-dialog-list-item-message-lines-count);
   overflow: hidden;
+  height: calc(
+    var(--sidebar-dialog-list-item-message-lines-count) *
+      var(--sidebar-dialog-list-item-message-line-height)
+  );
   /* autoprefixer: off */
   -webkit-box-orient: vertical;
 }
@@ -165,4 +171,5 @@
   text-align: center;
   vertical-align: middle;
   letter-spacing: -0.2px;
+  margin-left: 4px;
 }

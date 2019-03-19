@@ -5,7 +5,7 @@
 
 import React from 'react';
 import classNames from 'classnames';
-import type { Peer, MessageContent } from '@dlghq/dialog-types';
+import { L10n } from '@dlghq/react-l10n';
 import { Icon } from '@dlghq/dialog-ui';
 
 import Avatar from '../Avatar/Avatar';
@@ -13,6 +13,16 @@ import getAvatarPlaceholder from '../Avatar/utils/getAvatarPlaceholder';
 import { PeerInfoTitle } from '../PeerInfoTitle/PeerInfoTitle';
 import { MessagePreview } from '../MessagePreview/MessagePreview';
 import styles from './DialogListItem.css';
+
+export type Peer = {
+  type:
+    | 'PEERTYPE_UNKNOWN'
+    | 'PEERTYPE_PRIVATE'
+    | 'PEERTYPE_GROUP'
+    | 'PEERTYPE_ENCRYPTEDPRIVATE'
+    | 'PEERTYPE_SIP',
+  id: number,
+};
 
 export type DialogPeerInfo = {
   peer: Peer,
@@ -22,7 +32,23 @@ export type DialogPeerInfo = {
 
 export type DialogMessage = {
   sender: DialogPeerInfo,
-  content: MessageContent,
+  content:
+    | {
+        type:
+          | 'contact'
+          | 'document'
+          | 'location'
+          | 'photo'
+          | 'sticker'
+          | 'voice'
+          | 'video'
+          | 'unsupported'
+          | 'deleted',
+      }
+    | {
+        type: 'service' | 'text',
+        text: string,
+      },
 };
 
 export type DialogListItemProps = {
@@ -63,50 +89,57 @@ export function DialogListItem(props: DialogListItemProps) {
   }
 
   return (
-    <div className={classes} onClick={handleClick}>
-      <div className={styles.avatarBlock}>
-        <Avatar
-          size={44}
-          title={info.title}
-          image={info.avatar}
-          square={info.peer.type === 'group'}
-          placeholder={getAvatarPlaceholder(info.peer.id)}
-        />
-      </div>
-      <div className={styles.wrapper}>
-        <div className={styles.header}>
-          <div className={styles.titleBlock}>
-            <PeerInfoTitle title={info.title} className={styles.title} />
-            {isPinned ? (
-              <Icon
-                glyph="new_pin"
-                className={styles.icon}
-                width={20}
-                ariaLabel="pinned"
-                title="Pinned"
-              />
-            ) : null}
-            {isMuted ? (
-              <Icon
-                glyph="new_mute"
-                className={styles.icon}
-                width={20}
-                ariaLabel="muted"
-                title="Pinned"
-              />
-            ) : null}
+    <L10n>
+      {({ l10n: { formatText } }) => (
+        <div className={classes} onClick={handleClick}>
+          <div className={styles.avatarBlock}>
+            <Avatar
+              size={44}
+              title={info.title}
+              image={info.avatar}
+              square={info.peer.type === 'group'}
+              placeholder={getAvatarPlaceholder(info.peer.id)}
+            />
+          </div>
+          <div className={styles.wrapper}>
+            <div className={styles.header}>
+              <div className={styles.titleBlock}>
+                <PeerInfoTitle title={info.title} className={styles.title} />
+                {isPinned && (
+                  <Icon
+                    glyph="new_pin"
+                    className={styles.icon}
+                    width={20}
+                    ariaLabel="pinned"
+                    title={formatText('DialogListItem.pinned')}
+                  />
+                )}
+                {isMuted && (
+                  <Icon
+                    glyph="new_mute"
+                    className={styles.icon}
+                    width={20}
+                    ariaLabel="muted"
+                    title={formatText('DialogListItem.muted')}
+                  />
+                )}
+              </div>
+            </div>
+            <div className={styles.body}>
+              <div className={styles.message}>
+                {message && (
+                  <MessagePreview
+                    uid={uid}
+                    message={message}
+                    withSender={info.peer.type === 'group'}
+                  />
+                )}
+              </div>
+              {counter && <div className={styles.counter}>{counter}</div>}
+            </div>
           </div>
         </div>
-        <div className={styles.body}>
-          <MessagePreview
-            uid={uid}
-            info={info}
-            message={message}
-            className={styles.message}
-          />
-          {counter ? <div className={styles.counter}>{counter}</div> : null}
-        </div>
-      </div>
-    </div>
+      )}
+    </L10n>
   );
 }
