@@ -76,7 +76,7 @@ export function MessagePreview({
   }
 
   function renderSender() {
-    if (!withSender || !sender) {
+    if (!withSender || !sender || content.type === 'service') {
       return null;
     }
 
