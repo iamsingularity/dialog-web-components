@@ -76,9 +76,11 @@ function randomizeCounter() {
         isPinned={state.pinned.has(peer.peer.key)}
         isMuted={state.muted.has(peer.peer.key)}
         message={{
-          type: 'text',
-          sender: messages[0].sender,
-          content: messages[0].content.text,
+          sender: messages[2].sender,
+          content: {
+            type: 'text',
+            text: messages[0].content.text,
+          },
         }}
         onSelect={handleSelect}
       />

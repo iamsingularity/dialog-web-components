@@ -16,6 +16,7 @@ import {
 import styles from './DialogList.css';
 
 export type Dialog = {
+  uid: number,
   info: DialogPeerInfo,
   message?: DialogMessage,
   counter: number,
@@ -25,6 +26,7 @@ export type Dialog = {
 };
 
 export type DialogListProps = {
+  uid: number,
   className?: string,
   dialogs: Array<Dialog>,
   onSelect: (peer: Peer) => mixed,
@@ -33,9 +35,10 @@ export type DialogListProps = {
 
 export function DialogList({
   dialogs,
+  className,
+  uid,
   onSelect,
   onRender,
-  className,
 }: DialogListProps) {
   const classes = classNames(styles.container, className);
 
@@ -57,7 +60,7 @@ export function DialogList({
     return (
       <div key={key} style={style}>
         <DialogListItem
-          uid={2}
+          uid={uid}
           info={info}
           counter={counter}
           selected={false}
