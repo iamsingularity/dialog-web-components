@@ -5,11 +5,11 @@
 
 import React from 'react';
 import classNames from 'classnames';
-import type { Peer } from '@dlghq/dialog-types';
 import { AutoSizer, List } from 'react-virtualized';
 
 import {
   DialogListItem,
+  type Peer,
   type DialogPeerInfo,
   type DialogMessage,
 } from '../DialogListItem';
