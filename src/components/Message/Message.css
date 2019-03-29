@@ -34,13 +34,9 @@
   }
 }
 
-/* Reset */
-.container {
-  all: initial;
-}
-
 /* Styles */
 .container {
+  all: initial;
   position: relative;
   display: flex;
   flex-direction: row;
@@ -222,30 +218,22 @@
 }
 
 /* Content type  */
-.contact {
-}
+/* .contact {} */
 
 .document {
   margin-top: 4px;
 }
 
-.location {
-}
+/* .location {} */
 
-.photo {
-}
+/* .photo {} */
 
-.service {
-}
+/* .service {} */
 
-.sticker {
-}
+/* .sticker {} */
 
-.voice {
-}
+/* .voice {} */
 
-.video {
-}
+/* .video {} */
 
-.text {
-}
+/* .text {} */
